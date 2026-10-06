@@ -1,6 +1,6 @@
 ---
 name: forge-pipeline
-description: Canonical template, writing standards, and quality checklist for creating pipeline skills in the agenkit agent system. Use this skill when designing, generating, or validating a pipeline skill for any agent. Pipeline skills define the behavioral specification for a single execution flow — phases, actions, behavioral guardrails, and routing — loaded on demand by agents.
+description: Canonical template, writing standards, and quality checklist for creating pipeline skills in the demiurge agent system. Use this skill when designing, generating, or validating a pipeline skill for any agent. Pipeline skills define the behavioral specification for a single execution flow — phases, actions, behavioral guardrails, and routing — loaded on demand by agents.
 user-invocable: false
 ---
 

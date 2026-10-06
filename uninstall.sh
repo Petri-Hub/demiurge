@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET="${CLAUDE_HOME:-$HOME/.claude}"
-BACKUPS="$TARGET/.agenkit-backup"
+BACKUPS="$TARGET/.demiurge-backup"
 
 usage() {
   echo "Usage: ./uninstall.sh"

@@ -1,6 +1,6 @@
 ---
 name: workspace-structural-protocol
-description: Defines the .workspace/ folder structure, naming conventions, file ownership rules, and path patterns used across all agenkit agents. This is the schema — load it first to understand what the workspace looks like. For detection and folder initialization operations, load workspace-lifecycle-protocol after this one.
+description: Defines the .workspace/ folder structure, naming conventions, file ownership rules, and path patterns used across all demiurge agents. This is the schema — load it first to understand what the workspace looks like. For detection and folder initialization operations, load workspace-lifecycle-protocol after this one.
 user-invocable: false
 ---
 
@@ -8,7 +8,7 @@ user-invocable: false
 
 ## Purpose
 
-This skill defines the `.workspace/` directory — the file-based memory system used by all agenkit agents. It covers the folder layout, naming rules, file ownership, and path patterns. It does **not** cover how to detect or initialize workspaces — that belongs in `workspace-lifecycle-protocol`.
+This skill defines the `.workspace/` directory — the file-based memory system used by all demiurge agents. It covers the folder layout, naming rules, file ownership, and path patterns. It does **not** cover how to detect or initialize workspaces — that belongs in `workspace-lifecycle-protocol`.
 
 ## Repository Nature
 

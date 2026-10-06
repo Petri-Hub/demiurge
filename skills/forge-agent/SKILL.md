@@ -1,6 +1,6 @@
 ---
 name: forge-agent
-description: Canonical template and rules for creating new agent files in the agenkit agent system on Claude Code. Use this skill when you need to design, generate, or validate an agent prompt file. Covers the standard section order, the Claude Code frontmatter schema, content rules per section, and the quality checklist every agent must pass before being saved.
+description: Canonical template and rules for creating new agent files in the demiurge agent system on Claude Code. Use this skill when you need to design, generate, or validate an agent prompt file. Covers the standard section order, the Claude Code frontmatter schema, content rules per section, and the quality checklist every agent must pass before being saved.
 user-invocable: false
 ---
 
@@ -8,7 +8,7 @@ user-invocable: false
 
 ## **Purpose**
 
-Every agent in the agenkit fleet is forged from this one template — same sections, same order, same frontmatter contract. That uniformity is the reason the skill exists: it keeps the fleet coherent, makes any agent scannable and safe to edit, and lets God reason over all of them as a system instead of a pile of one-off prompts. Agent files are also load-bearing — a misconfigured frontmatter or a vague section produces broken behavior — so this is the template *and* the checklist that catches those failures before an agent ships.
+Every agent in the demiurge fleet is forged from this one template — same sections, same order, same frontmatter contract. That uniformity is the reason the skill exists: it keeps the fleet coherent, makes any agent scannable and safe to edit, and lets God reason over all of them as a system instead of a pile of one-off prompts. Agent files are also load-bearing — a misconfigured frontmatter or a vague section produces broken behavior — so this is the template *and* the checklist that catches those failures before an agent ships.
 
 ## **References**
 
@@ -257,7 +257,7 @@ Identity is the first prose after the frontmatter and seeds every downstream dec
 ```markdown
 ## **Identity**
 
-You are **{Name}**, the {role title} for the **agenkit** fleet. {One sentence on what the team/system does for context.}
+You are **{Name}**, the {role title} for the **demiurge** fleet. {One sentence on what the team/system does for context.}
 
 Your role is not to {things outside scope}. Your role is to **{core responsibility}** — {what this means in practice}.
 
@@ -271,7 +271,7 @@ The identity has four layers: name and role, core responsibility, explicit exclu
 ```markdown
 ## **Identity**
 
-You are **Architect**, the Software Architect for the **agenkit** fleet. You are the last checkpoint between an idea and working code — a vague plan produces broken code, a well-formed plan produces mechanical execution.
+You are **Architect**, the Software Architect for the **demiurge** fleet. You are the last checkpoint between an idea and working code — a vague plan produces broken code, a well-formed plan produces mechanical execution.
 
 You do not investigate incidents, write application code, or create tickets. Your singular responsibility is to **read research, understand the system, and produce an implementation plan that leaves nothing to interpretation.**
 

@@ -7,7 +7,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 
 usage() {
   echo "Usage: ./install.sh"
-  echo "Links agenkit agents and skills into \$CLAUDE_HOME (default: ~/.claude)."
+  echo "Links demiurge agents and skills into \$CLAUDE_HOME (default: ~/.claude)."
   echo "To remove them, run ./uninstall.sh."
 }
 
@@ -17,7 +17,7 @@ link() {
     [ "$(readlink "$destination")" = "$source" ] && return
     rm "$destination"
   elif [ -e "$destination" ]; then
-    local backup="$TARGET/.agenkit-backup/$STAMP"
+    local backup="$TARGET/.demiurge-backup/$STAMP"
     mkdir -p "$backup"
     mv "$destination" "$backup/$(basename "$destination")"
     echo "backed up $destination to $backup"

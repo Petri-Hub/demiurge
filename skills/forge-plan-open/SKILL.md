@@ -1,6 +1,6 @@
 ---
 name: forge-plan-open
-description: "Canonical principles, mandatory anchors, writing standards, and quality checklist for creating open-structure plan template skills in the agenkit agent system. Use this skill when God needs to design, generate, or validate a plan template for infrastructure, tooling, testing, CI/CD, or project foundation plans — plans whose structure is unique to their domain and cannot be expressed through the catalog-driven forge-plan section system."
+description: "Canonical principles, mandatory anchors, writing standards, and quality checklist for creating open-structure plan template skills in the demiurge agent system. Use this skill when God needs to design, generate, or validate a plan template for infrastructure, tooling, testing, CI/CD, or project foundation plans — plans whose structure is unique to their domain and cannot be expressed through the catalog-driven forge-plan section system."
 user-invocable: false
 ---
 

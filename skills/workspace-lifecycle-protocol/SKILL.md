@@ -24,7 +24,7 @@ These constraints are absolute. Violating any of them produces broken agent beha
 
 ## Repository
 
-`.workspace/` is a git repository shared by all agenkit agents. Its remote is **declared by the project, not by this skill** — one line in the project's `CLAUDE.md`:
+`.workspace/` is a git repository shared by all demiurge agents. Its remote is **declared by the project, not by this skill** — one line in the project's `CLAUDE.md`:
 
 ```
 Workspace remote: {workspace-remote}

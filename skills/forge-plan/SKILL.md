@@ -1,6 +1,6 @@
 ---
 name: forge-plan
-description: Canonical template, section catalog, composition rules, and quality checklist for creating new plan template skills in the agenkit agent system. Use this skill when God needs to design, generate, or validate a plan template skill file for the Architect. Covers the plan template skill format, the master section catalog, and the quality checklist every plan template must pass before being saved.
+description: Canonical template, section catalog, composition rules, and quality checklist for creating new plan template skills in the demiurge agent system. Use this skill when God needs to design, generate, or validate a plan template skill file for the Architect. Covers the plan template skill format, the master section catalog, and the quality checklist every plan template must pass before being saved.
 user-invocable: false
 ---
 

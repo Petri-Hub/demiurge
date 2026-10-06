@@ -12,15 +12,11 @@ This skill governs how documentation research files are written and read inside 
 
 **Load `workspace-structural-protocol` first** if you haven't already, to understand the broader workspace layout.
 
----
-
 ## Core Principle
 
 **Docs files are shared knowledge, not private notes.**
 
 When the Librarian produces a docs file, it writes it once and every downstream agent reads the same file. The Architect reads it during planning. The Executor reads it during implementation. Neither re-queries Context7 because the knowledge is already captured, synthesized, and persisted on disk. One research session, multiple consumers, zero duplication.
-
----
 
 ## File Location
 
@@ -55,8 +51,6 @@ The `docs/` subfolder is created when the first docs file is written. It does no
 - Research that targets the codebase itself — that belongs in `research/`
 - Investigation findings from observability tools — that belongs in `investigations/`
 
----
-
 ## File Ownership
 
 | Folder | Written by | Read by |
@@ -68,8 +62,6 @@ The `docs/` subfolder is created when the first docs file is written. It does no
 - Only the Librarian writes to `docs/` — other agents consume, they do not produce
 - Docs files are immutable once written — do not edit an existing docs file; produce a new numbered file if additional research is needed
 - Any agent can read any docs file at any time — there are no access restrictions
-
----
 
 ## Docs File Template
 
@@ -129,8 +121,6 @@ Does not need to be exhaustive, but must be honest:
 - If a finding is the Librarian's inference from multiple queries, say so.}
 ````
 
----
-
 ## The DCA Quality Framework
 
 Before writing any docs file, validate your output against DCA:
@@ -142,8 +132,6 @@ Before writing any docs file, validate your output against DCA:
 | **A** | **Actionable** | Can the consuming agent read this file and immediately know how to proceed — no additional research needed? |
 
 **If any letter fails, rewrite before saving.** A docs file that fails DCA wastes the consuming agent's context window and may introduce false confidence in undocumented behavior.
-
----
 
 ## Writing Standards
 
@@ -160,8 +148,6 @@ Before writing any docs file, validate your output against DCA:
 **Number files by reading priority, not discovery order.** If the request implies a foundational topic (e.g., project structure before configuration), write the foundation file first regardless of when you discovered it.
 
 **Do not dump raw documentation.** Copying paragraphs verbatim from Context7 results defeats the purpose. Synthesize — explain what the documentation says in terms the consuming agent can act on. Quote directly only for precise API signatures, configuration values, or critical behavioral constraints.
-
----
 
 ## Commands
 
@@ -201,8 +187,6 @@ for f in $(ls .workspace/{project}/{context-type}/{date}-{slug}/docs/ | sort); d
   echo "=== $f ==="; cat ".workspace/{project}/{context-type}/{date}-{slug}/docs/$f"; echo;
 done
 ```
-
----
 
 ## Quality Gate
 

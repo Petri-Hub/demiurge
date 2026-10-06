@@ -14,8 +14,6 @@ It is deliberately **domain-agnostic**. A web accessibility sweep, a security re
 
 Read the **workspace-structural-protocol** skill first — it defines the workspace repository and where audits sit within it. The **workspace-lifecycle-protocol** skill covers pulling before you write and pushing when you finish.
 
----
-
 ## What an audit is
 
 Every audit, whatever its domain, records these five things. When one is missing, the audit stops being reconstructable and becomes an opinion.
@@ -29,8 +27,6 @@ Every audit, whatever its domain, records these five things. When one is missing
 | **Verdict** | What is the overall judgement, and what was left unexamined? | Run card |
 
 **The schema is fixed; the domain is declared.** The run card's `audit type` field is what lets this one structure carry a WCAG sweep and a threat model equally well — so no audit domain ever needs a parallel folder shape.
-
----
 
 ## Structure
 
@@ -67,8 +63,6 @@ Worked shape:
         02-member-create-form-focus.png
 ```
 
----
-
 ## Naming
 
 ### Audit folder
@@ -101,8 +95,6 @@ When one dispatch fans out into several audits, give them a shared slug prefix s
 ### Evidence files
 
 Keep each tool's native format and extension — a raw `axe-violations.json` is more useful to the next reader than a prose summary of it. Number screenshots `{NN}-{descriptor}.png` from `01`, matching the crawl convention.
-
----
 
 ## The Run Card — `README.md`
 
@@ -142,8 +134,6 @@ Every audit folder opens with a run card. Its job is orientation and honest scop
 
 The findings index is what makes a folder-per-finding layout scannable: one table, whole audit.
 
----
-
 ## The Worklist — `AUDITS.md`
 
 The worklist is the audit's durable progress state. It exists because an audit walks many states and a context window does not survive that walk — everything not written down is lost when the run is compacted or interrupted. Update it as each state is finished, never in a batch at the end: a run stopped halfway must be resumable from this file alone.
@@ -181,8 +171,6 @@ The worklist is the audit's durable progress state. It exists because an audit w
 - **Instrumented runs per route; heuristic runs per state.** A modal on an already-measured route records `n/a (same route)` for instrumented rather than re-running a page-level engine against the same document.
 - **Skipped entries need a reason.** A state skipped for missing permission is a coverage gap, and the run card's Coverage section reports it — silence would read as "clean."
 - **Discovered states are appended to Pending** as they are found, so the worklist reflects real scope rather than the initial guess.
-
----
 
 ## The Finding — `README.md`
 
@@ -273,8 +261,6 @@ The row background and the body text colour need enough separation to clear 4.5:
 
 The same shape carries a failed functional flow or a misconfigured header — only the `criteria` and the evidence artifacts change.
 
----
-
 ## Vocabulary
 
 ### Verdict
@@ -300,8 +286,6 @@ Severity describes the finding, not the effort to resolve it.
 | `low` | Minor — cosmetic, edge-case, or visible only under unusual conditions |
 | `none` | Nothing is wrong to rate; pairs with `conformity` and most `observation` findings |
 
----
-
 ## Evidence
 
 Evidence is what separates an audit from an assertion. Each finding's `evidence/` folder holds the raw material behind it.
@@ -310,8 +294,6 @@ Evidence is what separates an audit from an assertion. Each finding's `evidence/
 - **List every evidence file in the finding README's Evidence table**, each with a line saying what it demonstrates. An unlisted file is invisible to a reader working from the report, and noise to one browsing the folder.
 - **Screenshot the state that demonstrates the finding**, including the surrounding context needed to recognize the screen.
 - **Trim volume, keep fidelity.** Excerpt a 40 MB log down to the relevant window and say what was trimmed — rather than attaching the whole file or paraphrasing it away.
-
----
 
 ## Ownership
 
@@ -326,8 +308,6 @@ Evidence is what separates an audit from an assertion. Each finding's `evidence/
 
 **One audit folder per dispatched audit unit.** When several audits run in parallel, separate folders keep their writes disjoint — shared folders collide on finding numbers and produce push conflicts between agents working at the same time.
 
----
-
 ## Persistence
 
 Audits follow the standard workspace sync in `workspace-lifecycle-protocol` — pull before writing, commit and push before returning to the invoker. Use the audit-specific commit action:
@@ -337,8 +317,6 @@ Audits follow the standard workspace sync in `workspace-lifecycle-protocol` — 
 ```
 
 Findings that are not pushed are invisible to every downstream reader, including the agent that dispatched the audit.
-
----
 
 ## Hard Constraints
 

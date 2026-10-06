@@ -7,14 +7,12 @@ user-invocable: false
 # **Skill: Teacher — Teaching Protocol**
 
 ## **Purpose**
----
 
 Course state is the product of the learning pipelines: a syllabus is a plan, a ledger is a memory model, a quiz file is evidence. This skill defines the schemas for that state and the spacing rules that update it, so every course session reads and writes the same structures regardless of when the last session ran.
 
 **Load `workspace-structural-protocol` and `workspace-lifecycle-protocol` first** — `teaching/` lives inside `.workspace/`, is synced by the same git protocol, and is owned exclusively by Teacher.
 
 ## **Layout**
----
 
 ```
 .workspace/teaching/
@@ -34,7 +32,6 @@ Course state is the product of the learning pipelines: a syllabus is a plan, a l
 Commit message convention: `teacher: {action} — {course-slug}`. Examples: `teacher: course opened — event-driven-architecture`, `teacher: session 4 complete — event-driven-architecture`.
 
 ## **File Schemas**
----
 
 ### **README.md — course card**
 
@@ -105,7 +102,6 @@ Commit message convention: `teacher: {action} — {course-slug}`. Examples: `tea
 ```
 
 ## **Spacing Rules**
----
 
 The ledger is updated after every quiz and every episode production, by these rules and no others:
 
@@ -116,7 +112,6 @@ The ledger is updated after every quiz and every episode production, by these ru
 - **Quiz selection:** every concept due on or before today, plus the newest consumed episode's concepts — capped at 4 questions, prioritized by weakest strength then longest overdue. Ask open questions that require free recall; multiple-choice tests recognition, which is the weaker signal.
 
 ## **Constraints**
----
 
 - **Only Teacher writes under `teaching/`.** Course state edited by another hand breaks the ledger's integrity — the spacing math assumes Teacher's rules produced every row.
 - **The ledger is updated through the Spacing Rules only.** Ad-hoc adjustments ("this feels learned") corrupt the schedule that makes retrieval land at the right moments; the user's results are the only input.

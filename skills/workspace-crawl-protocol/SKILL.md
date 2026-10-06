@@ -12,8 +12,6 @@ This skill governs how crawl records are written inside `.workspace/`. A crawl r
 
 **Load `workspace-structural-protocol` first** if you haven't already, to know where to write the files.
 
----
-
 ## Crawl Folder Structure
 
 Every crawl lives under `{project}/crawls/{date}-{slug}/` and contains:
@@ -43,8 +41,6 @@ Every crawl lives under `{project}/crawls/{date}-{slug}/` and contains:
 
 Both `README.md` and `FRONTIER.md` are always created — they are not optional.
 
----
-
 ## View Types
 
 Every visual state captured during a crawl is classified by type. The type appears in the view file header and helps consumers understand what kind of visual state they are looking at.
@@ -56,8 +52,6 @@ Every visual state captured during a crawl is classified by type. The type appea
 | `tab-panel` | Content displayed when a specific tab is active | Replaces content within a section of the page without navigating. Tab headers remain visible. |
 | `drawer` | A sliding panel from the edge of the screen | Partially covers the underlying page. Typically slides from left or right. |
 | `expanded-section` | Content revealed by expanding a collapsed element | Accordion panels, collapsible sections, dropdown menus. The expansion changes the visible content without full navigation. |
-
----
 
 ## View File Template
 
@@ -116,8 +110,6 @@ Examples: `01-homepage.md`, `02-homepage-settings-modal.md`, `03-about.md`, `04-
 - **Navigation is omitted only when explicitly disabled.** If the user disabled the Navigation section during Setup, omit it entirely — do not include an empty section header.
 - **Failed pages still get view files.** If a page fails to load, write a minimal view file with Visual Description describing the failure and the error details.
 
----
-
 ## The CRAWL Quality Framework
 
 Before finalizing any crawl record, validate your output against CRAWL:
@@ -131,8 +123,6 @@ Before finalizing any crawl record, validate your output against CRAWL:
 | **L** | **Linked** | Do screenshots, view files, FRONTIER entries, and README references all agree? No broken paths, no phantom references, no orphan files. |
 
 **If any letter fails, fix before saving.** A crawl record that fails CRAWL is unreliable as a reference artifact.
-
----
 
 ## FRONTIER.md Specification
 
@@ -195,8 +185,6 @@ FRONTIER.md is the audit trail of the crawl. It tracks every URL the agent encou
 2. **During execution:** URLs move from Pending → Visited or Pending → Skipped. Newly discovered URLs are added to Pending with priority `normal`.
 3. **Final state:** Pending table is empty. All URLs are in Visited or Skipped. No URL exists in more than one table.
 
----
-
 ## README.md Template
 
 Every crawl workspace must have a `README.md` at its root. It serves as both orientation (what is this crawl?) and results summary (what was found?).
@@ -239,8 +227,6 @@ Append the following sections to the initial README:
 - {If no issues, write "No issues encountered."}
 ```
 
----
-
 ## Screenshot Naming Conventions
 
 ```
@@ -259,8 +245,6 @@ Examples: `01-homepage.png`, `02-homepage-settings-modal.png`, `03-about.png`, `
 - If dynamic content is loading (spinners, skeleton screens), wait for completion before capturing
 - Record the final URL after redirects in metadata — the filename reflects the intended visual state, not the redirect target
 - Screenshots and view files share the same `{NN}-{slug}` naming — `01-homepage.png` corresponds to `01-homepage.md`
-
----
 
 ## Flow File Format
 
@@ -296,8 +280,6 @@ flowchart TD
 - **Filename matches the flow.** `authentication.md`, `checkout.md`, `settings-navigation.md` — descriptive, not generic.
 - **Include dead ends.** If a flow leads to an error page or a page with no onward navigation, include that terminal node. Do not truncate the flow at the last "successful" page.
 
----
-
 ## Writing Standards
 
 **Every screenshot must have a corresponding view file and FRONTIER.md entry.** If a screenshot exists in `screenshots/`, a view file with the same `{NN}-{slug}` must exist in `views/` (if View files enabled), and its URL must appear in the FRONTIER.md Visited table. If a URL appears in Visited with a screenshot path, the file must exist. No orphans.
@@ -315,8 +297,6 @@ flowchart TD
 **Flow files are derived from metadata, not guessed.** Every arrow in a flow diagram must correspond to an actual navigation action recorded during execution. Do not invent navigation paths that were not observed.
 
 **Failed pages are honest records.** If a page returned a 404 or 500, record it in FRONTIER.md and write a view file describing the failure. Do not omit it from the crawl record to make the results look cleaner.
-
----
 
 ## Commands
 
@@ -369,8 +349,6 @@ ls .workspace/${PROJECT}/crawls/${SLUG}/FRONTIER.md
 ```bash
 cd .workspace/ && git add . && git commit -m "crawler: crawl complete — ${SLUG}" && git push
 ```
-
----
 
 ## Quality Gate
 

@@ -10,8 +10,6 @@ user-invocable: false
 
 A project's rule system is what makes any agent generate code that matches the codebase instead of generic best-practice output. This skill exists to make that system reliable: it defines the one shape every rule file takes, the loading model that puts each rule in context at the right moment — and only then — and the checklist that catches defects before a rule ships. The single optimization target is **agent adherence**: every design choice below — mechanism-level reasons, inline anti-patterns, decision tables, right-time loading — serves it.
 
----
-
 ## **References**
 
 The official Claude Code documentation is the source of truth for how rules load. Consult it when loading behavior or frontmatter is in doubt — it evolves faster than this skill.
@@ -21,8 +19,6 @@ The official Claude Code documentation is the source of truth for how rules load
 | **Memory & rules** — CLAUDE.md locations, imports, rules directory, path scoping | https://code.claude.com/docs/en/memory.md |
 | **Monorepos** — root and per-directory rule layout in large repos | https://code.claude.com/docs/en/large-codebases.md |
 | **Full documentation index** — every available page | https://code.claude.com/docs/llms.txt |
-
----
 
 ## **The Two Artifacts**
 
@@ -36,8 +32,6 @@ God produces the two technical documents:
 | **`CLAUDE.md`** (repo root) | The agent's introduction to the project: a short macro view of what the system is, pointing at the rule system and telling the agent when to reach for the task-triggered rules. Generated wholesale from the rules on every run — it carries no rule content of its own. |
 
 In a monorepo, rules may sit under a base project folder — `.claude/rules/shelf-api/` — so several rule sets live side by side.
-
----
 
 ## **Loading Model**
 
@@ -60,8 +54,6 @@ Globs support brace expansion (`src/**/*.{ts,tsx}`) and multiple patterns. That 
 **The classification test:** a rule is always-apply if a model writing *any* file in the codebase must respect it. Everything else gets `paths` — scoped to the files where the rule's subject manifests. A rule whose trigger is a *task* rather than a file type (emitting an event, adding an audit entry) still gets `paths` covering the files that task touches (multiple globs are fine), plus a trigger row in CLAUDE.md so agents read it when planning the task, before any file is open.
 
 This per-rule granularity is the point: it keeps every session's context spent only on rules relevant to the work at hand.
-
----
 
 ## **Directory Structure**
 
@@ -97,8 +89,6 @@ CLAUDE.md                        # generated orientation file at the repo root
 | **Foundation** | Always-apply (no `paths`) | The universal trio: `architecture.md` (layer/dependency contract and directory layout — not the per-module catalogue, which is README material), `nomenclature.md`, `code-quality.md` |
 | **Concerns** | Per-rule, by the classification test | Cross-cutting practices (security model, error-handling philosophy → usually always-apply) and cross-cutting patterns (pagination, events, testing, configuration → usually path-scoped) |
 | **Components** | Path-scoped (always `paths`) | How to implement one component kind — entity, repository, use case, resource, DTO, mapper |
-
----
 
 ## **The Rule Template**
 
@@ -159,8 +149,6 @@ location. Include an import only when the import itself is the lesson.>
 
 There is no Checklist section, no Related-rules line, and no References section inside a rule — each file is self-contained.
 
----
-
 ## **CLAUDE.md Generation**
 
 `CLAUDE.md` at the repo root orients any agent to the project and its rule system. It is regenerated in full from `.claude/rules/` on every run and contains no rule content — the loader puts the rules themselves in context; CLAUDE.md tells the agent what the system is and when to reach for the task-triggered rules.
@@ -194,14 +182,10 @@ task-triggered rules below.
 - Rule paths in the table are plain text in backticks — never `@`-imports. An `@`-import loads the file at launch, which both defeats the on-demand intent and duplicates what the rules loader already loads.
 - No rule bodies, no hand-written prose beyond the Intro and the two-line loading explanation. The file is overwritten in full on every run.
 
----
-
 ## **Naming**
 
 - Filenames: kebab-case topic + `.md`, no suffix — `use-case.md`, `error-handling.md`.
 - Selection test: a developer scanning the path must know what the rule covers. `components/application/use-case.md` passes; `rules.md` does not.
-
----
 
 ## **Writing Standards**
 
@@ -218,8 +202,6 @@ Verifiable rules — a rule file that violates any of them fails the checklist a
 9. **Size is governed by content.** Cap combined Do + Don't rows at ≤12 — a rule needing more is two rules. Reference tables and examples may run as long as the canonical content requires.
 10. **Language is English.** Prose, headers, and titles in English; example code in the project's language.
 11. **Emoji are fixed:** `✅` for Do / Correct, `🚫` for Don't / Wrong. Never `❌`.
-
----
 
 ## **Quality Checklist**
 

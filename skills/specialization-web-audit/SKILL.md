@@ -31,8 +31,6 @@ For each URL in scope, at the resolved depth:
 3. Capture screenshots at the required breakpoints — written straight into `evidence/` by passing a path — and read the console → save into `evidence/`
 4. Move to the next URL — Lighthouse and the accessibility audit both run **one URL per invocation**
 
----
-
 ## Lighthouse
 
 ### Invocation
@@ -65,8 +63,6 @@ The result object (the "LHR") carries category scores (0–1) and individual aud
 > **INP is field data, not lab.** Lighthouse's lab run does not measure INP — it reports **Total Blocking Time** as the responsiveness proxy. Treat TBT as the lab stand-in; genuine INP needs real user interaction (CrUX/field data), which a synthetic audit does not have. Do not report an "INP" number pulled from a lab LHR — it isn't there.
 
 Extract the fields you need with a small `jq` or Node read of the saved `lhr.json`; keep the full LHR in `evidence/` as the raw proof.
-
----
 
 ## axe-core
 
@@ -104,8 +100,6 @@ Each entry in the audit's `violations[]` carries:
 
 Save the whole violations JSON into the finding's `evidence/`; the `target` selector is what makes the finding reconstructable.
 
----
-
 ## Authenticated & SPA runs
 
 **Authenticated areas.** The accessibility audit and every screenshot run inside the run's browser session, so they inherit whatever authentication that session holds. Reach logged-in pages by establishing auth once within the session rather than re-authenticating per URL:
@@ -125,8 +119,6 @@ agent-browser a11y --json          # then the audit and any screenshots
 
 Audit each route as its own navigation — an SPA that changes the URL client-side still needs Lighthouse and the accessibility audit pointed at the resolved URL per view.
 
----
-
 ## Visual & responsive evidence
 
 Use the browser for the heuristic and best-practices evidence the scored engines don't capture:
@@ -136,8 +128,6 @@ Use the browser for the heuristic and best-practices evidence the scored engines
 - **Failed requests** — `agent-browser network requests --json` to list 4xx/5xx and mixed-content requests as evidence for Best Practices.
 
 Name screenshots `{NN}-{descriptor}.png` in the path you pass, so they land in the finding's `evidence/` matching the workspace convention.
-
----
 
 ## Setup & first-run checks
 
@@ -157,8 +147,6 @@ Install Lighthouse into a scratch working directory rather than a project — it
 - **One URL per run** for both Lighthouse and the accessibility audit — batching pages into one invocation is not supported; loop.
 - **Treat a tool crash as a blocker, not a pass.** If Lighthouse exits non-zero or the accessibility audit errors, the concern was not measured — surface it, never record a silent pass.
 
----
-
 ## Common mistakes
 
 | Mistake | What to do instead |
@@ -170,8 +158,6 @@ Install Lighthouse into a scratch working directory rather than a project — it
 | Summarizing tool output instead of saving it | Save the raw LHR and violations JSON into `evidence/`; the raw artifact is the proof |
 | Chrome fails to launch (Lighthouse) in the container | Add `--no-sandbox` / `--headless=new` to the Lighthouse chrome-flags; for agent-browser, run `agent-browser doctor` / `agent-browser install` |
 | Hard-coding login credentials to reach protected pages | Authenticate once inside the run's browser session (or replay a saved auth profile); take credentials from the environment |
-
----
 
 ## Resources
 

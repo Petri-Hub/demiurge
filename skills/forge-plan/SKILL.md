@@ -12,8 +12,6 @@ A plan is the contract between the Architect and the implementation agent — ev
 
 This skill is the canonical reference for creating those templates. Every plan template draws its sections from the Section Catalog defined here — no template invents sections outside the catalog. If a gap exists, God surfaces it and the user decides whether to extend the catalog first.
 
----
-
 ## Plan Template Skill Format
 
 Every plan template skill follows this canonical structure. No exceptions.
@@ -193,8 +191,6 @@ Writing standards are the guardrails that prevent the Architect from producing v
 - Don't duplicate standards that are already in individual section directives
 - Don't write standards as aspirational guidelines — they must be verifiable rules
 
----
-
 ## Composition Rules
 
 These rules govern how God selects and orders sections when composing a plan template from the Section Catalog.
@@ -266,8 +262,6 @@ When God composes a plan template, use these heuristics for common types:
 | Frontend feature | frontend | 1-4, 6, 10-11, 14-18 | 5, 7-9, 12-13 (backend) | Omit any conditional section whose criteria are not met |
 | Full-stack feature | universal | All whose criteria are met | — | Backend + frontend sections combined |
 | Hotfix | backend or frontend | 1, 10-11, 18 | Most others | Surgical — ADRs only if non-obvious choice; Test Strategy always |
-
----
 
 ## Section Catalog
 
@@ -1601,8 +1595,6 @@ Add a hold flow to the title page for titles with no available copy. The existin
 - Don't include changes to the main application module here — those go in Files Created / Modified / Deleted
 - Don't use this section as a catch-all for "miscellaneous changes" — every entry must be genuinely cross-domain
 - Don't omit infrastructure prerequisites — if the application change depends on infrastructure, say so explicitly
-
----
 
 ## Quality Checklist
 

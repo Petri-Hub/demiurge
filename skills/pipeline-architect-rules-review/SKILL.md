@@ -120,8 +120,6 @@ A response handoff carrying the verdict, the findings, and an honest account of 
 - [ ] The response handoff is written in the format the handoff skill defines
 - [ ] The response states the rule system's presence or absence and lists every unverified rule
 
----
-
 ## Knowledge
 
 ### Conformance Dimensions

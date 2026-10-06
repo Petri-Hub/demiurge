@@ -7,7 +7,6 @@ user-invocable: false
 # **Skill: Forge Principles**
 
 ## **Purpose**
----
 
 This skill exists because a structurally perfect artifact can still behave badly. An agent file can pass every template checklist and still drift — its constraints phrased as prohibitions the model activates rather than suppresses, its one load-bearing rule buried mid-list where attention is thinnest. Structure is necessary and not sufficient. This skill owns the rest: the **wording** — whether the instructions inside an artifact are written in a way a model will actually follow.
 
@@ -15,20 +14,14 @@ This is a **reference, not a pipeline**. It has no phases and is never executed 
 
 Every principle below is a **tradeoff axis with two failure poles**, not a law. Applied deliberately, they raise artifact quality on the first draft. Applied dogmatically, they become their own failure mode — which is why each names both poles and a heuristic for leaning, never a rule.
 
----
-
 ## **How to Apply**
----
 
 - **Deliberately, not dogmatically.** Name the principle in your reasoning when it drives a design decision. A principle that does not bite on this artifact is not invoked — the same discipline the domain agents apply to their Engineering and Architecture Principles.
 - **As axes, not switches.** Each principle has two failure poles. The skill is leaning the right way for the artifact in hand, not maximizing one end. "More specific" and "more explicit" are not universally better — they have costs, named below.
 - **At two moments.** Consult before writing artifact content, to shape it; consult again during adversarial Self-review, to attack the draft against each principle as a review dimension.
 - **Under a clear precedence.** These principles govern *how* content is written; the artifact's structural template governs *what sections exist*. When they appear to conflict, the template wins on section shape, the principles win on wording within a section.
 
----
-
 ## **Authoring Principles**
----
 
 | Principle | The tension | Heuristic — lean which way |
 |---|---|---|
@@ -45,10 +38,7 @@ Every principle below is a **tradeoff axis with two failure poles**, not a law. 
 
 > Apply deliberately. A principle that does not bite on this artifact is not invoked.
 
----
-
 ## **Applying Each Principle**
----
 
 Compact guidance for authoring artifacts, with the reason each principle holds. This is the "why" the table omits for brevity.
 
@@ -72,10 +62,7 @@ Compact guidance for authoring artifacts, with the reason each principle holds. 
 
 - **Pointer over payload.** The test is whether a field's cost tracks the question or the work: a count, a stat, and a path are fixed; a list, a tree, and a document are not. Unbounded output is worst precisely when it matters most — the run with a hundred changed files is the one where the summary needs to stay readable, and a render re-emitted at several points multiplies its cost by the number of emissions. This governs both directions and the same defect appears at each: an instruction that has an agent enumerate its *inputs* (a recursive listing to discover what exists) and one that has it enumerate its *outputs* (every changed file in a summary) fail identically. Author the stat, the count, or the path, and let the reader open what they need.
 
----
-
 ## **Review Lens**
----
 
 During adversarial Self-review, attack the draft against these dimensions, reading the file back rather than reviewing from memory:
 
@@ -90,10 +77,7 @@ During adversarial Self-review, attack the draft against these dimensions, readi
 - [ ] Are there contradictions across sections, and is precedence stated wherever two rules can collide?
 - [ ] Does every instruction that produces output bound its size, pointing at whatever scales with the work?
 
----
-
 ## **Scope & Boundaries**
----
 
 - **Applies to every artifact God forges** — agent files, pipeline skills, plan templates, handoff skills, MDC rule sets. It is the shared craft layer beneath all of them.
 - **HITL gate design is out of scope here.** The principles for *where and how many* human gates a flow should carry are a pipeline-authoring concern and live in `forge-pipeline`. Consult them when the artifact being authored is an interactive pipeline; this skill governs instruction wording, not gate topology.

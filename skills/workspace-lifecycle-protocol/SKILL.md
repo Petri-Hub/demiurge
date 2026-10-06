@@ -12,8 +12,6 @@ This skill governs how agents **interact** with `.workspace/` — syncing with t
 
 **Load `workspace-structural-protocol` first** to understand the folder layout, naming rules, and ownership before using any operation in this skill.
 
----
-
 ## Hard Constraints
 
 These constraints are absolute. Violating any of them produces broken agent behavior — duplicate workspaces, lost data, or sync conflicts.
@@ -23,8 +21,6 @@ These constraints are absolute. Violating any of them produces broken agent beha
 - **`.workspace/` lives in your current working directory. You never clone it elsewhere.** Always clone `.workspace/` into the directory where you are working — the project root. Never clone into a parent directory, a sibling directory, `/tmp/`, or any external path. Other agents expect `.workspace/` at the project root. Placing it elsewhere breaks cross-agent file sharing.
 
 - **Sync before work. Persist before handoff.** Every agent invocation begins with a pull (or clone if not present). Every agent that writes files commits — and pushes, when a remote is declared — before returning to the orchestrator, before a HITL gate, and before any handoff. No exceptions.
-
----
 
 ## Repository
 
@@ -37,8 +33,6 @@ Workspace remote: {workspace-remote}
 `{workspace-remote}` is any git URL the team can push to, kept separate from the product repository so plans and records never enter product history. Read the line before syncing. When the project declares no remote, the workspace is local-only: initialize it with `git init`, commit as usual, and skip every push.
 
 This repository is the single source of truth. Every agent syncs on entry and persists before exit.
-
----
 
 ## Sync Protocol
 
@@ -111,8 +105,6 @@ quality-engineer: audit complete — 2026-07-23-member-portal-accessibility
 | Uncommitted changes after pull | `git add . && git commit -m "recovery: ..."` |
 | Agent completes work unit | `git add . && git commit -m "{agent}: {action}" && git push` (no push without a remote) |
 
----
-
 ## Detection
 
 Before initializing any workspace folders, detect what already exists.
@@ -136,8 +128,6 @@ ls .workspace/{project}/audits/
 ```
 
 Match by slug (the descriptive part after the date). The date prefix makes listing chronologically sorted by default.
-
----
 
 ## Folder Initialization
 
@@ -199,8 +189,6 @@ crawler: crawl complete — 2026-05-05-member-portal-mapping
 crawler: crawl complete — 2026-05-05-checkout-flow-screenshots
 ```
 
----
-
 ## Continuation
 
 When a workspace already exists and you need to add content to it.
@@ -222,8 +210,6 @@ touch .workspace/{project}/{type}/{slug}/{subfolder}/{N}-{descriptive-slug}.md
 ### Before appending
 
 Always read the existing `README.md` and any existing files in the target subfolder before writing new ones. This prevents duplicating information that was already captured and ensures numbering continues correctly.
-
----
 
 ## Rules
 

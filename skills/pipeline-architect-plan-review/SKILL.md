@@ -120,8 +120,6 @@ A response handoff carrying the verdict, the findings, and an honest account of 
 - [ ] The response handoff is written in the format the handoff skill defines
 - [ ] Every unverified claim is stated in the response
 
----
-
 ## Knowledge
 
 ### Attack Dimensions

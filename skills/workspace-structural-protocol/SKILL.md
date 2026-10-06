@@ -10,13 +10,9 @@ user-invocable: false
 
 This skill defines the `.workspace/` directory — the file-based memory system used by all agenkit agents. It covers the folder layout, naming rules, file ownership, and path patterns. It does **not** cover how to detect or initialize workspaces — that belongs in `workspace-lifecycle-protocol`.
 
----
-
 ## Repository Nature
 
 `.workspace/` is a **git repository**, not a plain folder. It is a shared, version-controlled store cloned from the remote the project declares — or a local repository when it declares none. Every agent clones it into its current working directory on first use, pulls before every session, and pushes after completing work. Treat `.workspace/` as a database with git-based concurrency — never as a local scratch directory.
-
----
 
 ## Core Principle
 
@@ -24,15 +20,11 @@ This skill defines the `.workspace/` directory — the file-based memory system 
 
 When an agent produces research, a plan, documentation research, a composition, a crawl record, or an audit, it writes a file. The next agent reads that file directly. This keeps individual agent context windows lean and ensures no information is lost between handoffs.
 
----
-
 ## Constraints
 
 - **`.workspace/` is obtained by `git clone` (or `git init` when the project declares no remote), never by `mkdir`.** The directory is a shared git repository. Creating it as a plain folder disconnects the agent from all prior work and breaks cross-agent file sharing. See `workspace-lifecycle-protocol` for the full sync specification.
 
 - **`.workspace/` lives in the agent's current working directory.** Always clone into the project root where you are working. Never clone into a different path, a parent directory, or an external location. Other agents expect `.workspace/` at the project root.
-
----
 
 ## Full Structure
 
@@ -114,8 +106,6 @@ When an agent produces research, a plan, documentation research, a composition, 
 
 > **`audits/` is a shared project workspace type, open to any agent performing an audit.** Its internal schema — the run card, the per-finding folder, the verdict and severity vocabulary, and the evidence rules — lives in `workspace-audit-protocol`. Load that skill before writing an audit.
 
----
-
 ## Folder Purpose
 
 | Folder | Purpose |
@@ -133,8 +123,6 @@ When an agent produces research, a plan, documentation research, a composition, 
 | `teaching/` | System area (outside any project) for Teacher's learning pipelines — active course state and archive |
 | `teaching/courses/{date}-{course-slug}/` | One active course: card, syllabus, spacing ledger, quiz history, episode records — written by Teacher only |
 | `teaching/archive/{date}-{course-slug}/` | Completed courses, moved here whole at close — written by Teacher only |
-
----
 
 ## Naming Conventions
 
@@ -245,8 +233,6 @@ Naming inside an audit folder — finding folders and evidence files — is defi
 
 All workspace types use a `{date}-` prefix. This means `ls` output is naturally sorted chronologically — newest at the bottom, oldest at the top. No extra tooling needed to find recent work.
 
----
-
 ## Path Reference Pattern
 
 All workspace paths follow this pattern:
@@ -256,8 +242,6 @@ All workspace paths follow this pattern:
 ```
 
 The `{project}` segment is always present for **workspaces**. The only areas outside a project folder are `evolution/` (the evolution loop) and `teaching/` (Teacher's course state) — system areas rather than project workspaces.
-
----
 
 ## File Ownership
 
@@ -299,8 +283,6 @@ The `{project}` segment is always present for **workspaces**. The only areas out
 - Every agent writes its friction notes only to its own `evolution/entries/{agent-id}/` folder — never to another agent's folder, and never to `evolution/archive/` or `evolution/reviews/`
 - Teacher writes to `teaching/` and its own `evolution/entries/teacher/` only — never to project folders; no other agent writes to `teaching/`
 
----
-
 ## README.md Template
 
 Every workspace folder must have a `README.md` at its root. Keep it short — its purpose is orientation, not documentation.
@@ -317,8 +299,6 @@ Every workspace folder must have a `README.md` at its root. Keep it short — it
 
 {1–3 sentences describing what this workspace is for.}
 ```
-
----
 
 ## Agent Quick Reference
 

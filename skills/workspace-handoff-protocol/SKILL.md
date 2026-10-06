@@ -12,15 +12,11 @@ This skill governs how handoff files are written and read inside `.workspace/`. 
 
 **Load `workspace-structural-protocol` first** if you haven't already, to understand the broader workspace layout.
 
----
-
 ## Core Principle
 
 **Every inter-agent communication that transfers work is a file, not a message.**
 
 When an orchestrator dispatches a sub-agent, when a leaf agent signals completion, when an architect requests a review — the coordination lives in a handoff file. The receiving agent reads the file from disk. The file persists for auditing, debugging, and resumption. No information is lost between handoffs because no information lives only in memory.
-
----
 
 ## File Location
 
@@ -66,8 +62,6 @@ The `execution/handoffs/` folder is created when the first handoff file is writt
 - File reads where no coordination is needed — the agent reads the file directly
 - Responses that are purely conversational — no work is being transferred
 
----
-
 ## Naming Convention
 
 ```
@@ -101,8 +95,6 @@ The `execution/handoffs/` folder is created when the first handoff file is writt
 ```
 
 One dispatch file can produce multiple response files when an orchestrator sends the same handoff to several sub-agents. Each sub-agent writes its own response file with the next available number.
-
----
 
 ## Universal Structure
 
@@ -163,8 +155,6 @@ Add these when the handoff needs them. Omit them when it doesn't.
 | **Constraints** | When the receiver must respect specific boundaries during execution |
 | **References** | When the receiver needs to consult other files, skills, or documentation |
 | **Examples** | When the payload format is complex enough that a concrete example clarifies intent |
-
----
 
 ## Payload Composition
 
@@ -242,8 +232,6 @@ Use a composing payload when:
 ### Decision rule
 
 **Before composing, check if the content already exists in the workspace.** If it does, point to it. If it doesn't, compose it. Never do both for the same data — either the file IS the content, or the handoff IS the content. Duplication creates drift.
-
----
 
 ## Writing Principles
 
@@ -327,8 +315,6 @@ If the receiver needs a plan file, include the path. If it needs a research file
 ### 9. Concrete values in examples, never placeholders
 
 When providing concrete payload values, use actual paths, actual field values, actual commands. No `{placeholder}` syntax. A value like `.workspace/shelf/features/2026-05-12-loan-extension/plans/1-loan-extension.md` is a real path. A value like `{plan_path}` is not — it forces the receiver to guess what goes there.
-
----
 
 ## Good vs Bad Examples
 
@@ -570,8 +556,6 @@ NEXT_ACTION: Route to Architect with the workspace path for feature planning.
 - NEXT_ACTION must name a concrete next step and who performs it
 ````
 
----
-
 ## Commands
 
 ### Create the handoffs directory
@@ -604,8 +588,6 @@ ls .workspace/{project}/features/{date}-{slug}/execution/handoffs/ | sort -t'-' 
 # Read a specific handoff file back
 cat .workspace/{project}/features/{date}-{slug}/execution/handoffs/{N}-{slug}.md
 ```
-
----
 
 ## Quality Gate
 

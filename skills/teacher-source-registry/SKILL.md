@@ -7,14 +7,12 @@ user-invocable: false
 # **Skill: Teacher — Source Registry**
 
 ## **Purpose**
----
 
 This registry encodes the user's taste in learning material so every study session starts from earned trust instead of a cold web search. Teacher reads it before proposing any source strategy, weighs registered sources first, and treats the channel heuristics as the playbook for where a given kind of question is best answered.
 
 The registry is a **starting bias, not a cage**. A topic the registry covers poorly still deserves a full search — the registry tells you where quality has been found before, not where it is allowed to exist.
 
 ## **How to Use**
----
 
 - Load at session start, before the source-strategy proposal.
 - Match the topic's *need* to a channel type using the heuristics below, then propose the mix — the user picks.
@@ -22,7 +20,6 @@ The registry is a **starting bias, not a cage**. A topic the registry covers poo
 - Prefer publicly accessible pages — NotebookLM ingests URLs server-side without the user's login, so paywalled articles arrive as teasers. For paywalled newsletters, use their free issues or archive pages.
 
 ## **Channels**
----
 
 ### **Newsletters — deep dives and industry analysis**
 
@@ -87,7 +84,6 @@ The user's stated channel. Quality varies widely — vet the author's track reco
 | [Javarevisited](https://medium.com/javarevisited) | Consistent system-design and career content; curated publication |
 
 ## **Maintenance**
----
 
 - **Additions:** when a session proves a new source excellent — the user says so, or its material clearly carried the notebook — propose registering it with the channel, link, and a one-line "why". Write it here only after the user approves.
 - **Removals:** when the user repeatedly cuts a registered source from shortlists, propose retiring it. Taste drifts; the registry follows the user, never argues with them.

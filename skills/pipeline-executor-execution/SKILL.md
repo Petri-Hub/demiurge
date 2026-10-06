@@ -255,8 +255,6 @@ The run's outcome rendered in full, and the delivery target executed exactly as 
 - [ ] Run card rendered with the complete ledger written out
 - [ ] Delivery target executed exactly as selected at Setup
 
----
-
 ## Knowledge
 
 ### Run Parameters

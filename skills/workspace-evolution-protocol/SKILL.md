@@ -14,8 +14,6 @@ You only write them down — you don't act on them yourself. The notes are read 
 
 **Read `workspace-structural-protocol` first** — it explains the `.workspace/` folder and how it's synced. Your notes live inside it.
 
----
-
 ## When to write your notes
 
 Do this at **one point only: right at the end, just before you report that you're done.**
@@ -44,8 +42,6 @@ Most runs have no friction worth recording. **"No friction this run" is a correc
 
 Do **not** invent friction to fill the close-out. A fabricated entry is worse than silence: it pollutes the review with noise that buries the real notes. Log liberally when friction is real; log nothing when it is not.
 
----
-
 ## What Counts as Friction
 
 Log liberally — if something genuinely chafed, it is worth an entry. Examples:
@@ -64,8 +60,6 @@ Log liberally — if something genuinely chafed, it is worth an entry. Examples:
 - **The user changing their mind or scope.** That is direction, not a system defect.
 - **A constraint stopping you from doing something out of scope.** When a guardrail blocks out-of-scope work, it is functioning correctly — that is not friction, that is the boundary doing its job. Only log a constraint when it blocked work you believe was genuinely *in* scope.
 - **Your own reasoning error that you caught and corrected** with no systemic cause behind it.
-
----
 
 ## Entry Location and Naming
 
@@ -95,8 +89,6 @@ If `evolution/entries/` or your agent folder does not exist yet, create it befor
 ```bash
 mkdir -p .workspace/evolution/entries/{agent-id}
 ```
-
----
 
 ## Entry Schema
 
@@ -152,8 +144,6 @@ I added an unofficial "Event Flows" subsection by hand inside the Implementation
 A dedicated "Asynchronous Flows" section in the plan template, covering producers, consumers, and the message contract.
 ```
 
----
-
 ## Persistence
 
 Evolution entries ride your normal end-of-run persistence. Because the close-out runs immediately before you report completion — the same point at which you commit and push your work — your entries are included in that push automatically.
@@ -165,8 +155,6 @@ cd .workspace/ && git add evolution/ && git commit -m "{agent-id}: evolution ent
 ```
 
 Never leave an entry uncommitted — an unpushed entry is invisible to the review and the note is lost.
-
----
 
 ## Hard Constraints
 

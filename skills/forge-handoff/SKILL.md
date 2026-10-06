@@ -12,8 +12,6 @@ When one agent dispatches work to another, both need to agree on exactly what is
 
 This skill is the template for producing those contracts. It defines the contract's content — not the runtime mechanics of handoff files (location, naming, universal structure), which belong to the workspace protocol layer that every handoff skill references instead of duplicating.
 
----
-
 ## **The Two Essentials**
 
 Everything else in a handoff contract is adaptable; these two are not.
@@ -52,8 +50,6 @@ its absence is the declaration that the handoff is one-way.}
 
 **2. The pointer principle.** When the material being handed over already exists as a file — a plan, a research document, an implementation — the payload carries a *pointer* to it (its workspace path, plus scope notes on what to look at), never the material itself inlined into the dispatch. Chat is transport, not storage: inlined content bloats context, drifts from the file on disk the moment either changes, and leaves no auditable record. The receiver follows the pointer and reads the source of truth. Compose actual content into payload fields only for data that exists nowhere else — a mission statement, scope boundaries, constraints gathered for this dispatch.
 
----
-
 ## **Writing the Sections**
 
 **Purpose** — 2-3 sentences: what the handoff achieves, which pipeline phase triggers it, and whether the receiver returns a response or only signals completion.
@@ -67,8 +63,6 @@ its absence is the declaration that the handoff is one-way.}
 **Validation** — a short list of concrete pass/fail rules both parties check ("every path in `files_changed` exists on disk", "an `approved` verdict requires an empty findings list").
 
 **Error Handling** — what the sender does when its own dispatch fails validation, what the receiver does when the dispatch it gets is invalid or the work itself fails, and what the sender does with an invalid response. Name the action in each case.
-
----
 
 ## **Example — a Dispatch payload**
 
@@ -92,8 +86,6 @@ ignore_sections:
 ````
 
 The plan itself never appears in the payload — `plan_path` points at it.
-
----
 
 ## **Quality Checklist**
 

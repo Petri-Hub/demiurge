@@ -54,8 +54,6 @@ url: https://my-website.com
 maestro-runner test .maestro/smoke-test.yaml
 ```
 
----
-
 ## Frontmatter Format
 
 Every Maestro YAML flow file has a header section separated from the flow steps by `---`. Getting this wrong produces invalid flows that fail silently or throw parse errors.
@@ -102,8 +100,6 @@ appId: com.myapp
 ---
 - launchApp
 ```
-
----
 
 ## Core Patterns
 
@@ -409,8 +405,6 @@ Available relative selectors:
 | `containsChild:` | Element contains a direct child matching the reference |
 | `containsDescendants:` | Element contains all specified descendant elements |
 
----
-
 ## Test File Template
 
 ```yaml
@@ -462,8 +456,6 @@ env:
 
 - takeScreenshot: 02-final-state
 ```
-
----
 
 ## Folder Structure
 
@@ -606,8 +598,6 @@ maestro-runner test --include-tags ci .maestro/
 maestro-runner test --exclude-tags wip .maestro/
 ```
 
----
-
 ## Debugging
 
 ```bash
@@ -618,8 +608,6 @@ maestro-runner test --output results/ .maestro/   # Output to specific directory
 ```
 
 Screenshots and results saved to the Runner's output directory (default or as specified by `--output`).
-
----
 
 ## Maestro Runner
 
@@ -660,8 +648,6 @@ With both this skill and the Runner available, the AI can:
 3. **See** failures via Runner output and auto-captured screenshots
 4. **Fix** the YAML and re-run — all in one conversation
 
----
-
 ## Checklist for New Tests
 
 ```
@@ -682,8 +668,6 @@ With both this skill and the Runner available, the AI can:
 [ ] Tags added for CI filtering (ci, smoke, wip)
 ```
 
----
-
 ## Common Errors
 
 | Error | Cause | Fix |
@@ -694,8 +678,6 @@ With both this skill and the Runner available, the AI can:
 | "Assertion is false" on visibility | Element not rendered yet | Increase timeout or verify testID exists |
 | Script output empty | Wrong JS API | Use `http.get()` not `fetch()` |
 | Permission dialog blocking (Android) | System dialog not dismissed | Add `tapOn: text: "Allow" optional: true` |
-
----
 
 ## Common Mistakes
 
@@ -714,8 +696,6 @@ With both this skill and the Runner available, the AI can:
 | Using `fetch()` in GraalJS scripts | Muscle memory from browser-based JavaScript | GraalJS doesn't have `fetch()`. Use `http.get()` / `http.post()` from Maestro's scripting API. See **Common Errors** table. |
 | Writing one giant test for an entire user journey | Feels natural — "test the whole signup flow in one file" | Break into sub-flows (auth, action, verify). One scenario per file. Easier to debug, fix, and re-run. See **Pattern 6**. |
 | Assuming the user is logged in | `clearState: true` wipes all sessions — the app is always logged out at test start. Tests that skip login fail every time | Every main flow must include auth handling after `launchApp`: either an adaptive `runFlow` with a `when` condition, or a login subflow. If the app has no auth, add a comment documenting that decision. See **Pattern 2**. |
-
----
 
 ## Resources
 

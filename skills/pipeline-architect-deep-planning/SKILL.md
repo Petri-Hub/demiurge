@@ -236,8 +236,6 @@ Every plan verified against its template, and the delivery target executed exact
 - [ ] Delivery target executed exactly as selected at Setup
 - [ ] Every plan the target published reported with its link, and every carried-forward question named
 
----
-
 ## Knowledge
 
 ### Run Parameters

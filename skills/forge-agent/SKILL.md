@@ -10,8 +10,6 @@ user-invocable: false
 
 Every agent in the agenkit fleet is forged from this one template — same sections, same order, same frontmatter contract. That uniformity is the reason the skill exists: it keeps the fleet coherent, makes any agent scannable and safe to edit, and lets God reason over all of them as a system instead of a pile of one-off prompts. Agent files are also load-bearing — a misconfigured frontmatter or a vague section produces broken behavior — so this is the template *and* the checklist that catches those failures before an agent ships.
 
----
-
 ## **References**
 
 The official Claude Code documentation is the source of truth for the runtime behavior this skill builds on. Consult it when a frontmatter field, permission rule, or tool behavior is in doubt — it evolves faster than this skill.
@@ -26,8 +24,6 @@ The official Claude Code documentation is the source of truth for the runtime be
 | **Model configuration** — model names and selection | https://code.claude.com/docs/en/model-config.md |
 | **Tools reference** — every built-in tool, exact names, permission behavior | https://code.claude.com/docs/en/tools-reference.md |
 | **Full documentation index** — every available page | https://code.claude.com/docs/llms.txt |
-
----
 
 ## **Agent File Template**
 
@@ -103,8 +99,6 @@ mcpServers:
 
 {External anchors}
 ````
-
----
 
 ## **Section Guide**
 
@@ -393,7 +387,6 @@ Every response starts with a phase header:
 
 ```
 # {AgentName} | {Phase Name}
----
 ```
 
 - Show it on the first response, on every phase transition, and when re-engaging after a gap — not on every message within a phase
@@ -684,8 +677,6 @@ References anchor the agent's reasoning style. *Clean Architecture* on an archit
 
 **Do:** explain why each reference matters for this role; cite specific principles; cap at 3-5.
 **Don't:** name-drop without a why; list generic "best practices"; leave placeholder text — omit the whole section if there are no references.
-
----
 
 ## **Quality Checklist**
 

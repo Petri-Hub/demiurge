@@ -141,8 +141,6 @@ A user-facing answer delivered at the right altitude, in the requested format, w
 - [ ] The workspace is committed and pushed
 - [ ] A specific next step is proposed rather than an open question
 
----
-
 ## Knowledge
 
 ### Run Card

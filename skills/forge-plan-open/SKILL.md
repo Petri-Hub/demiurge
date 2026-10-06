@@ -10,8 +10,6 @@ user-invocable: false
 
 Some plans have no fixed shape: infrastructure, tooling, CI/CD, project foundation — work whose structure is unique to its domain and cannot be expressed through a catalog of predefined sections. Forcing those plans into catalog sections produces documents that fit the template and miss the work. Open-structure templates solve this with discipline instead of a catalog: four mandatory anchors (Summary, Context & Motivation, Scope, ADRs) that every plan must answer, and a freehand body the Architect composes at plan time from domain-specific sections guided by principles. This skill is the canonical reference for creating those templates — there are no recommended or default sections beyond the anchors; the Architect decides what the plan needs.
 
----
-
 ## Open-Structure Plan Template Skill Format
 
 Every open-structure plan template skill follows this canonical structure. No exceptions.
@@ -74,8 +72,6 @@ user-invocable: false
 - Don't use a vague name like `plan-open-generic` — the name states the scope the template covers (`tooling`, `mobile`, `data`). A deliberately stack-agnostic template is allowed when its scope is named and its Purpose tells the Architect to ground freehand sections in the target repository's stack at plan time
 - Don't create a stack-agnostic template when the project already has a stack-specific one for the same scope — the specific one carries verified stack facts the generic one has to rediscover on every run
 - Don't include selection guidance ("NOT for domain features…") — the Architect has already decided which template to load before reading the skill
-
----
 
 ## Mandatory Anchors
 
@@ -253,8 +249,6 @@ The deployment pipeline currently runs all jobs on a single runner, causing buil
 - Don't write trade-offs as purely positive — every decision sacrifices something
 - Don't repeat the ADR content in freehand sections — reference by ID
 
----
-
 ## Freehand Body
 
 ### What it is
@@ -327,8 +321,6 @@ Builds the staging Docker image, tags it with the commit SHA, and pushes to the 
 Image tag convention: `staging-{commit-sha}` (per ADR-02 — enables rollback by tag).
 ````
 
----
-
 ## Writing Standards
 
 These standards apply to every open-structure plan, regardless of domain.
@@ -349,8 +341,6 @@ These standards apply to every open-structure plan, regardless of domain.
 
 **Configuration values must be grounded.** If the plan specifies environment variables, default values, or configuration constants, each must trace to where that value comes from — a Terraform file, an existing config file, a verified documentation source. Invented configuration values are assumptions, and assumptions become silent bugs.
 
----
-
 ## Open-Structure Plan Template Composition
 
 When God composes an open-structure plan template, the structure is:
@@ -370,8 +360,6 @@ The mandatory anchors always come first, in this order. Freehand sections follow
 1. **Includes all four mandatory anchors** — always, no exceptions
 2. **Does NOT enumerate freehand sections** — the template's freehand body is left open. The template provides the principles (from the Freehand Body section above) and the Architect composes the actual sections at plan time, based on the specific plan's domain
 3. **Grounds the template in the project's technology stack** — the Purpose section names the concrete technologies, patterns, and integrations the Architect should expect, so freehand sections are grounded in verified stack facts. A deliberately stack-agnostic template names no stack; its Purpose instead instructs the Architect to establish the target repository's stack during grounding, before any freehand section is written
-
----
 
 ## Quality Checklist
 

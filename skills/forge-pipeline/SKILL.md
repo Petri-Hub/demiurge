@@ -12,8 +12,6 @@ Pipeline skills exist because agents accumulate multiple execution flows, most o
 
 This skill is the canonical reference for those pipeline skills — self-contained behavioral specifications, each defining a single execution flow with phases, intent-level actions, behavioral guardrails, and quality gates. Every pipeline skill God creates follows the format, writing standards, and quality checklist defined here. If a pipeline needs a structure not covered by this skill, God surfaces the gap and the user decides whether to extend this skill before proceeding.
 
----
-
 ## Pipeline Skill Format
 
 Every pipeline skill follows this canonical structure. Sections appear in this order. The four core sections are mandatory and none is omitted. Constraints and Knowledge are optional — each included only when the pipeline needs it — and appear after Phases, in that order.
@@ -549,8 +547,6 @@ In every shape, the phase names what it consults — an Action reads *"classify 
 - Don't duplicate agent Knowledge — reference is single-source; pick the correct level and point to it
 - Don't place Knowledge before Phases — it breaks the Purpose → Presentation → Flow → Phases reading-path
 
----
-
 ## Gate Design
 
 Gates are both a safeguard and a cost: each one buys quality control with the user's attention. These principles govern where an interactive pipeline places its HITL gates and how much weight each carries. Apply them when designing any flow with human gates.
@@ -562,8 +558,6 @@ Gates are both a safeguard and a cost: each one buys quality control with the us
 - **Guard against confirmation fatigue.** Over-gating trains rubber-stamping and erodes the gates that matter. If two gates always get approved together, they are one gate.
 - **Escalate on low confidence or non-convergence.** A bounded retry loop that exhausts its iterations without converging becomes a gate — surface the unresolved state to the user rather than shipping around it.
 - **Gate on what the agent can know at that point.** A gate that demands foresight the phase has not yet earned — a boundary declared before grounding, a cost estimated before measurement — fires on guesses. It will fire wrongly far more often than rightly, and a gate that is usually wrong trains the user to clear it without reading. Place the gate where the knowledge is, or drop it and let the agent record its judgment instead.
-
----
 
 ## Writing Standards
 
@@ -622,8 +616,6 @@ These standards govern how God writes pipeline skill specifications. They are ve
 **No meta-commentary in actions.** "This is important because..." belongs in an Avoid item, not in an action. Actions are instructions, not explanations. Keep actions clean and move rationale to Avoid items.
 
 **No synonyms for structural elements.** Use "Goal", "Actions", "Avoid", and "Exit when:" as the four element headers for every phase. Do not use alternatives like "Objective", "Steps", "Instructions", "Warning", "Don'ts", "Completion criteria", or "Postconditions." The Exit header is always the two-word `Exit when:` — never bare `Exit`, never `Exit Conditions`, never `Done When`. Consistent naming lets the agent locate what it needs without scanning for synonyms, and the `when:` suffix is part of the gate signal — it tells the agent the section that follows is a blocking precondition, not a summary.
-
----
 
 ## Quality Checklist
 

@@ -1,103 +1,113 @@
-<h1 align="center">🧩 agenkit</h1>
+<h1 align="center">🏺 demiurge</h1>
 
 <br>
 
 <h3 align="center">15 agents and 58 skills for Claude Code.<br>Plain markdown, installed with symlinks</h3>
 
 <p align="center">
-  <a href="https://github.com/Petri-Hub/agenkit/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/Petri-Hub/agenkit" /></a> <a href="LICENSE.md"><img alt="License" src="https://img.shields.io/github/license/Petri-Hub/agenkit" /></a>
+  <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-D97757?logo=claude&logoColor=white" /> <a href="https://github.com/Petri-Hub/demiurge/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/Petri-Hub/demiurge" /></a>
 </p>
 
 <br>
 
 ## About
 
-> **TL;DR:** a set of specialized Claude Code agents instead of one long conversation. An Orchestrator proposes the next step and dispatches an Architect, an Executor, reviewers and a few others, each with its own model, tools and skills. I built it for my own daily work and this is the generic version, with every project-specific example replaced by a fictional library app called `shelf`. There is nothing to build: it is `.md` files and one install script.
+> **TL;DR:** a harness for Claude Code, made of plain markdown, built around one agent that doesn't write code. I call it God, and its job is to write the instructions of every other agent: their system prompts, the pipelines they follow, the plan templates and the handoff contracts. Around it sits the roster I run: an Orchestrator that dispatches an Architect, an Executor and the reviewers that attack their work, with every agent handing work to the next as files.
+
+## The idea
+
+<img alt="God loads the forge skills, writes the agents, pipelines, plan templates, handoff contracts and rule systems, and reviews the evolution notes the agents record" src="assets/god.png" />
+
+<br>
+
+**A model computes what comes next from everything that came before:** the system prompt, the skill it loaded, the plan it was handed, the handoff it read. So the quality of what comes out depends on how well that *before* is written, and the real question is what the best possible instructions look like for the work you want out.
+
+**God is the agent I built to answer that question in files.** It is a regular Claude Code agent, but it never touches your code. You tell it what you need, say a new agent, a pipeline or a plan template, and it works out with you the best artifact it can write for another agent to read and follow. It does the same to check or improve one that already exists.
+
+**It also closes a loop. At the end of every run, each agent writes down the friction it hit in its own instructions,** and God reviews those notes in batches and fixes the instructions. That is what makes this a meta-harness: one agent shapes the environment of all the others, and what the others learn flows back to it.
+
+**Current frontier models are good at following a path.** A pipeline is a path, with phases, entry and exit conditions and gates, and inside each phase the model is free to adapt. You keep the flexibility of the model and it gets a direction to follow.
+
+## Don't use this
+
+> **Don't use these agents. Use the one that makes them.** This harness was built around my work: my agents, my HITL gates, my way of reviewing. The piece worth taking is **God**, the agent that creates the others, together with the forge skills.
+
+I built it for a financial system, where I needed to read and understand what was going to be built before it was built. That is why there is an Architect whose plan I review, and an Executor whose code can go through four reviewers before it reaches me. There is a Scribe for writing anything from a post-mortem to a simple integration report, and a Crawler that gathers context from other websites and maps their features before I recreate the product. Those are my needs. Yours are different, and you would spend your time fighting agents shaped around mine.
+
+## How to use this
+
+Take **God**, the `pipeline-god-*` skills, the `forge-*` skills and the three `workspace-*` skills God uses to record its own notes. Leave the rest, or read it as examples of what God produces.
+
+Start Claude Code with `claude --agent God` and tell it what you need: an agent, a pipeline, a plan template, a handoff contract or a rule system. It interviews you first, writes the draft, then attacks its own draft against the forge checklist before handing it over. God needs the Context7 MCP server configured in Claude Code.
+
+`install.sh` links the whole kit into `~/.claude`. To take only the God subset, link those folders by hand.
+
+```sh
+git clone https://github.com/Petri-Hub/demiurge.git && cd demiurge && ./install.sh
+```
+
+Agents read their skills from `~/.claude/skills`, so allow `Read(~/.claude/skills/**)` in your `settings.json`. `./uninstall.sh` removes only the links it created. It does not restore anything `install.sh` moved to `~/.claude/.demiurge-backup/`.
 
 ## How it works
 
-```
-                          you
-                           │
-                           ▼
-                     Orchestrator
-                           │
-      ┌──────────┬─────────┼──────────┬───────────┐
-      ▼          ▼         ▼          ▼           ▼
-  Architect   Executor  Crawler  Quality-Engineer  Scribe
-      │          │
-      ├─ Plan reviewer      ├─ Quality reviewer
-      └─ Rules reviewer     ├─ Security reviewer
-                            ├─ Test reviewer
-                            └─ Refinement reviewer
+The Orchestrator is the entry point: it proposes the next step, dispatches the specialists and stops at the gates. The Architect's plan is attacked by two reviewers before you read it. The Executor's code can be attacked by four, each switched on per run: quality, security, tests, and whether the code honors the plan's behavioral contracts. God and the Teacher you call directly.
 
-  Librarian   documentation research, called by Architect, Executor and others
-  Teacher     courses and spaced repetition, on its own
-  God         writes and maintains the agents and skills themselves
-```
+<img alt="Organogram: You reach God, the Orchestrator and the Teacher. The Orchestrator dispatches the Architect, the Executor and on-demand specialists. Two reviewers attack the Architect's plan and four attack the Executor's code" src="assets/roster.png" />
 
-Agents don't share memory. What one learns, the next reads from a file in `.workspace/`, a git repository that lives next to your project and holds plans, handoffs, audits and crawl records. Each agent knows which folders it may write to.
+## Glossary
 
-## The three decisions that mattered
+| Entity | What it is |
+|---|---|
+| **Agent** | A markdown file with a system prompt, a model, a tool list and the agents it is allowed to call. Lives in `agents/` |
+| **Skill** | A markdown file an agent loads on demand instead of carrying it in its prompt. Lives in `skills/<name>/SKILL.md` |
+| **Pipeline** | A skill describing one execution flow: phases, each with a goal, actions, things to avoid and exit conditions |
+| **Forge skill** | The template and the quality checklist for one kind of artifact. God's reference material |
+| **Plan template** | What the Architect fills in to write a plan. Either catalog-driven, for domain features, or open-structure, for tooling and infrastructure |
+| **Handoff** | A typed markdown file one agent writes for another, with a purpose, a context, a payload table and a validation block. The receiver reads it from disk |
+| **Workspace** | `.workspace/`, a git repository beside your project where plans, handoffs, research, docs, audits, crawls and evolution notes live. Each agent knows which folders it may write to |
+| **HITL gate** | A point where an agent stops and asks you. The Orchestrator runs at one of three levels: Supervised, Guided (the default) or Autonomous |
+| **Behavioral contract** | A numbered, testable statement in a plan, such as BC-01. The Refinement reviewer checks the code and the tests against them |
+| **Evolution note** | A short note an agent writes at the end of a run about friction in its own instructions. God reviews them in batches |
+| **Rule system** | `.claude/rules/` plus the root `CLAUDE.md` that orients the agents, in three tiers: foundation, concerns and components |
 
-**📄 Handoffs are files, not conversation.** A sub-agent only sees what it is given, so each dispatch is a typed markdown file with a payload and a validation block, and each response is another file. The receiver reads it from disk and the trail stays there for debugging.
+Skills are grouped by prefix: `pipeline-` for flows, `forge-` for templates, `workspace-` for layout, naming and git lifecycle, `handoff-` for what each reviewer receives, `specialization-` for tools (tmux, Maestro, Slidev, Lighthouse and axe, agent-browser, frontend design) and `teacher-` for course state and source ranking.
 
-**🔒 Every agent writes to its own folders.** Librarian only writes `docs/`, Scribe only `compositions/`, and Architect never writes research. Reviews and plans stay separate from the work they judge, which is the point of having a second agent look at it.
+## The forge skills
 
-**🧪 The agent that writes is not the one that reviews.** Executor writes the code and four reviewers check it afterwards, each on one concern: quality, security, tests, and whether the code honors the plan's behavioral contracts. Most reviewers run on Sonnet, the planners and the Executor on Opus.
+They define the structure of every agent, pipeline, plan template, handoff and rule system in the kit, and each one carries the quality checklist an artifact has to pass before God is allowed to save it.
 
-## Install
+| Skill | Used when |
+|---|---|
+| `forge-principles` | Before writing the content of any artifact, and on every review pass. It covers the wording, not the structure: how to phrase an instruction so a model follows it. Reference only, it has no phases |
+| `forge-agent` | Creating, validating or updating an agent file: section order, frontmatter, delegation rules |
+| `forge-pipeline` | Creating, validating or updating a pipeline skill: phases, actions, exit conditions, gate design |
+| `forge-plan` | Creating a catalog-driven plan template, for plans with entities, use cases and API contracts |
+| `forge-plan-open` | Creating an open-structure plan template, for infrastructure, tooling, CI/CD and migrations, where the structure is specific to the domain |
+| `forge-handoff` | Creating a handoff skill, the contract between two agents: payload design and the rule of passing a path instead of copying content |
+| `forge-mdcs` | Creating a project's rule system, the `.claude/rules/` tiers and the root `CLAUDE.md` |
 
-```sh
-git clone https://github.com/Petri-Hub/agenkit.git
-cd agenkit
-./install.sh
-```
+## When it is worth it
 
-It symlinks every agent into `~/.claude/agents` and every skill into `~/.claude/skills`, so a `git pull` updates them. Anything already at a destination is moved to `~/.claude/.agenkit-backup/`, never overwritten. `./uninstall.sh` removes only the links it created, and tells you where the backups are if there are any. It doesn't restore them.
+It is worth it when a mistake is expensive: fintech, distributed systems, anything mission critical. You trade tokens and time for review before and after the work. A plan is not one model's first draft, it gets attacked by other agents. Code is not only implemented, it can come back with the findings of four reviewers. The point is to stay away from the keyboard and still deliver something you can trust.
 
-Agents read their skills from `~/.claude/skills`, so allow that path in `~/.claude/settings.json`:
+If your work is not critical, it is probably not worth the cost. Plain Claude Code with a few skills is faster and cheaper, and for most work that is the better trade.
 
-```json
-{ "permissions": { "allow": ["Read(~/.claude/skills/**)"] } }
-```
+## What it produced
 
-Then start Claude Code with the Orchestrator as the main agent:
+Counted on the workspace the agents kept while I used this, from 13 May to 2 September 2026, the last commit in my copy.
 
-```sh
-claude --agent Orchestrator
-```
+| What | Count |
+|---|---|
+| Plan files, in feature workspaces | 149, across 120 workspaces |
+| Handoff files between agents | 601 |
+| Audits, with their findings | 27 audits, 261 findings |
+| Incident workspaces, with their investigation files | 10 workspaces, 16 files |
+| Research files, and documentation files from the Librarian | 122 and 71 |
+| Evolution notes written by the agents | 876 |
+| Markdown files in the workspace | 3,254, about 241,500 lines |
+| Commits to the workspace repository | 1,327 |
 
-## What's inside
-
-```sh
-├── agents          # 15 agents, one file each
-├── skills          # 58 skills, one folder each, grouped by prefix
-│   ├── pipeline-*        # 30 · the flow each agent follows, phase by phase
-│   ├── forge-*           # 7  · templates God uses to write agents, pipelines and plans
-│   ├── workspace-*       # 7  · the .workspace/ layout, naming and git lifecycle
-│   ├── handoff-*         # 6  · what each reviewer is handed
-│   ├── specialization-*  # 6  · tools: tmux, Maestro, Slidev, Lighthouse and axe, agent-browser, frontend design
-│   └── teacher-*         # 2  · course state and source ranking
-├── install.sh      # symlinks agents and skills into ~/.claude
-├── uninstall.sh    # removes only the links install.sh created
-└── LICENSE.md
-```
-
-## Before you use it
-
-Five agents declare an MCP server in their frontmatter, and Claude Code starts it through `npx`, `uvx` or a local binary:
-
-| Agent | MCP server | Needs |
-|---|---|---|
-| Crawler | Playwright | Node |
-| Executor, Architect, Quality-Engineer | next-devtools | Node |
-| Architect | Sentrux | the `sentrux` binary |
-| Teacher | NotebookLM | `uv` |
-
-If you don't use an agent, its server never starts. Models and effort are set per agent in the frontmatter, so lowering the Opus agents to Sonnet is a one-line change each, at the cost of weaker plans.
-
-This is not a framework. There is no versioned interface, and the agents assume each other's file formats, so expect to edit the markdown to fit your project. The examples inside the skills use `shelf`, a library lending app, and the Java-style module layout in some of them is only an example.
+The kit itself is 15 agent files and 58 skills, 73 markdown files and about 17,000 lines.
 
 ## License
 

@@ -54,7 +54,7 @@ cd agenkit
 ./install.sh
 ```
 
-It symlinks every agent into `~/.claude/agents` and every skill into `~/.claude/skills`, so a `git pull` updates them. Anything already at a destination is moved to `~/.claude/.agenkit-backup/`, never overwritten. `./install.sh --uninstall` removes only the links it created.
+It symlinks every agent into `~/.claude/agents` and every skill into `~/.claude/skills`, so a `git pull` updates them. Anything already at a destination is moved to `~/.claude/.agenkit-backup/`, never overwritten. `./uninstall.sh` removes only the links it created, and tells you where the backups are if there are any. It doesn't restore them.
 
 Agents read their skills from `~/.claude/skills`, so allow that path in `~/.claude/settings.json`:
 
@@ -79,7 +79,8 @@ claude --agent Orchestrator
 │   ├── handoff-*         # 6  · what each reviewer is handed
 │   ├── specialization-*  # 6  · tools: tmux, Maestro, Slidev, Lighthouse and axe, agent-browser, frontend design
 │   └── teacher-*         # 2  · course state and source ranking
-├── install.sh      # symlink installer, with --uninstall
+├── install.sh      # symlinks agents and skills into ~/.claude
+├── uninstall.sh    # removes only the links install.sh created
 └── LICENSE.md
 ```
 

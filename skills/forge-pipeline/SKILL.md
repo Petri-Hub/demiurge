@@ -10,7 +10,7 @@ user-invocable: false
 
 Pipeline skills exist because agents accumulate multiple execution flows, most of which are irrelevant to any given invocation. A 1,000-line agent file carrying 9 pipelines forces the model to route past 8 irrelevant specifications to find the 1 it needs — degrading focus and wasting context window on every turn. Extracting each flow into its own skill eliminates this pollution: the agent carries a routing table (which pipeline to run) and loads the full specification only when needed.
 
-This skill is the canonical reference for those pipeline skills — self-contained behavioral specifications, each defining a single execution flow with phases, intent-level actions, behavioral guardrails, and quality gates. Every pipeline skill God creates follows the format, writing standards, and quality checklist defined here. If a pipeline needs a structure not covered by this skill, God surfaces the gap and the user decides whether to extend this skill before proceeding.
+This skill is the canonical reference for those pipeline skills — self-contained behavioral specifications, each defining a single execution flow with phases, intent-level actions, behavioral guardrails, and quality gates. Every pipeline skill Demiurge creates follows the format, writing standards, and quality checklist defined here. If a pipeline needs a structure not covered by this skill, Demiurge surfaces the gap and the user decides whether to extend this skill before proceeding.
 
 ## Pipeline Skill Format
 
@@ -39,7 +39,7 @@ The frontmatter identifies the skill and tells the agent when to load it. The `n
 
 | Field | Required | Description |
 |---|---|---|
-| `name` | Yes | Skill identifier. Must follow the pattern `pipeline-{agent}-{name}`. Examples: `pipeline-god-agent-creation`, `pipeline-architect-deep-planning`, `pipeline-executor-execution`. |
+| `name` | Yes | Skill identifier. Must follow the pattern `pipeline-{agent}-{name}`. Examples: `pipeline-demiurge-agent-creation`, `pipeline-architect-deep-planning`, `pipeline-executor-execution`. |
 | `description` | Yes | One-line description of when the agent loads this pipeline. Must be specific enough to distinguish this pipeline from the agent's other pipelines. |
 | `user-invocable` | Yes | Always `false` — pipeline skills are loaded by agents from their routing tables, never invoked directly by the user. |
 
@@ -57,7 +57,7 @@ user-invocable: false
 
 ```yaml
 ---
-name: pipeline-god-agent-creation
+name: pipeline-demiurge-agent-creation
 description: Load when the user requests creation of a new agent file — drives the full interactive pipeline from intake through adversarial self-review to delivery.
 user-invocable: false
 ---
@@ -70,7 +70,7 @@ user-invocable: false
 - Make `description` specific enough that the agent can distinguish this pipeline from its siblings without loading the full skill
 
 **Don't:**
-- Don't use generic names like `pipeline-god-default` or `pipeline-god-main` — every pipeline has a specific purpose
+- Don't use generic names like `pipeline-demiurge-default` or `pipeline-demiurge-main` — every pipeline has a specific purpose
 - Don't include the agent name in the description — it's already in the `name` field
 - Don't add fields beyond these three — the frontmatter schema is fixed and shared across all pipeline skills
 
@@ -147,11 +147,11 @@ Phase headers for this pipeline:
 
 | Phase | Header |
 |---|---|
-| Intake | `God \| Intake` |
-| Alignment | `God \| Alignment` |
-| Production | `God \| Production` |
-| Self-review | `God \| Self-review` |
-| Delivery | `God \| Delivery` |
+| Intake | `Demiurge \| Intake` |
+| Alignment | `Demiurge \| Alignment` |
+| Production | `Demiurge \| Production` |
+| Self-review | `Demiurge \| Self-review` |
+| Delivery | `Demiurge \| Delivery` |
 ```
 
 #### Directives
@@ -561,7 +561,7 @@ Gates are both a safeguard and a cost: each one buys quality control with the us
 
 ## Writing Standards
 
-These standards govern how God writes pipeline skill specifications. They are verifiable rules, not aspirational guidelines. A pipeline skill that violates any of these standards fails the quality checklist and is not saved until the violation is fixed.
+These standards govern how Demiurge writes pipeline skill specifications. They are verifiable rules, not aspirational guidelines. A pipeline skill that violates any of these standards fails the quality checklist and is not saved until the violation is fixed.
 
 ### Phase Specification
 
@@ -619,7 +619,7 @@ These standards govern how God writes pipeline skill specifications. They are ve
 
 ## Quality Checklist
 
-Every pipeline skill God produces must pass this checklist before being saved. Run every check. Fix every failure. No exceptions. If a check fails after the maximum number of review iterations, surface the unresolved item to the user instead of saving a known-defective file.
+Every pipeline skill Demiurge produces must pass this checklist before being saved. Run every check. Fix every failure. No exceptions. If a check fails after the maximum number of review iterations, surface the unresolved item to the user instead of saving a known-defective file.
 
 ### Structural
 

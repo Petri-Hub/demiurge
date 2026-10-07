@@ -22,9 +22,9 @@ The official Claude Code documentation is the source of truth for how rules load
 
 ## **The Two Artifacts**
 
-A project carries two kinds of documents, and the boundary between them is what keeps both useful. **Technical documents** govern how code is written — anything an agent must obey *while coding* lives as a rule file. **Business and human documents** explain what the system is for — onboarding, domain context, the per-module catalogue. These live in the project's `README.md`, which is the place to reach for business context on the codebase; God never touches it.
+A project carries two kinds of documents, and the boundary between them is what keeps both useful. **Technical documents** govern how code is written — anything an agent must obey *while coding* lives as a rule file. **Business and human documents** explain what the system is for — onboarding, domain context, the per-module catalogue. These live in the project's `README.md`, which is the place to reach for business context on the codebase; Demiurge never touches it.
 
-God produces the two technical documents:
+Demiurge produces the two technical documents:
 
 | Artifact | Role |
 |---|---|

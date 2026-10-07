@@ -1,6 +1,6 @@
 ---
 name: forge-plan-open
-description: "Canonical principles, mandatory anchors, writing standards, and quality checklist for creating open-structure plan template skills in the demiurge agent system. Use this skill when God needs to design, generate, or validate a plan template for infrastructure, tooling, testing, CI/CD, or project foundation plans — plans whose structure is unique to their domain and cannot be expressed through the catalog-driven forge-plan section system."
+description: "Canonical principles, mandatory anchors, writing standards, and quality checklist for creating open-structure plan template skills in the demiurge agent system. Use this skill when Demiurge needs to design, generate, or validate a plan template for infrastructure, tooling, testing, CI/CD, or project foundation plans — plans whose structure is unique to their domain and cannot be expressed through the catalog-driven forge-plan section system."
 user-invocable: false
 ---
 
@@ -343,7 +343,7 @@ These standards apply to every open-structure plan, regardless of domain.
 
 ## Open-Structure Plan Template Composition
 
-When God composes an open-structure plan template, the structure is:
+When Demiurge composes an open-structure plan template, the structure is:
 
 ```
 1. Summary                    (mandatory anchor)
@@ -355,7 +355,7 @@ When God composes an open-structure plan template, the structure is:
 
 The mandatory anchors always come first, in this order. Freehand sections follow, in whatever order the plan's domain demands. There are no recommended or default sections between the anchors and the freehand body.
 
-### How God composes an open-structure template
+### How Demiurge composes an open-structure template
 
 1. **Includes all four mandatory anchors** — always, no exceptions
 2. **Does NOT enumerate freehand sections** — the template's freehand body is left open. The template provides the principles (from the Freehand Body section above) and the Architect composes the actual sections at plan time, based on the specific plan's domain

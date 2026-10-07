@@ -78,7 +78,7 @@ Evolution entries live under a dedicated top-level area of the `.workspace/` rep
       {date}-review.md          ← review ledgers (don't write here)
 ```
 
-- `{agent-id}` — your own name in kebab-case, matching the workspace commit convention: `quality-engineer`, `architect`, `executor`, `god`, `scribe`.
+- `{agent-id}` — your own name in kebab-case, matching the workspace commit convention: `quality-engineer`, `architect`, `executor`, `demiurge`, `scribe`.
 - `{date}` — ISO format, today's date: `2026-06-15`.
 - `{slug}` — short kebab-case naming the friction: `ambiguous-date-format`, `missing-lint-report-tool`, `plan-assumed-research-files`.
 

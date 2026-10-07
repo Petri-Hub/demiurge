@@ -8,7 +8,7 @@ user-invocable: false
 
 ## **Purpose**
 
-Every agent in the demiurge fleet is forged from this one template — same sections, same order, same frontmatter contract. That uniformity is the reason the skill exists: it keeps the fleet coherent, makes any agent scannable and safe to edit, and lets God reason over all of them as a system instead of a pile of one-off prompts. Agent files are also load-bearing — a misconfigured frontmatter or a vague section produces broken behavior — so this is the template *and* the checklist that catches those failures before an agent ships.
+Every agent in the demiurge fleet is forged from this one template — same sections, same order, same frontmatter contract. That uniformity is the reason the skill exists: it keeps the fleet coherent, makes any agent scannable and safe to edit, and lets Demiurge reason over all of them as a system instead of a pile of one-off prompts. Agent files are also load-bearing — a misconfigured frontmatter or a vague section produces broken behavior — so this is the template *and* the checklist that catches those failures before an agent ships.
 
 ## **References**
 
@@ -436,7 +436,7 @@ An orchestrator:
 - **Executor:** code implementation from plans or ad-hoc requirements
 
 ### **Who you never invoke**
-- **God:** meta-agent for artifact production — never part of an engineering workflow
+- **Demiurge:** meta-agent for artifact production — never part of an engineering workflow
 ```
 
 A leaf agent:

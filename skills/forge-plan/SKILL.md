@@ -1,6 +1,6 @@
 ---
 name: forge-plan
-description: Canonical template, section catalog, composition rules, and quality checklist for creating new plan template skills in the demiurge agent system. Use this skill when God needs to design, generate, or validate a plan template skill file for the Architect. Covers the plan template skill format, the master section catalog, and the quality checklist every plan template must pass before being saved.
+description: Canonical template, section catalog, composition rules, and quality checklist for creating new plan template skills in the demiurge agent system. Use this skill when Demiurge needs to design, generate, or validate a plan template skill file for the Architect. Covers the plan template skill format, the master section catalog, and the quality checklist every plan template must pass before being saved.
 user-invocable: false
 ---
 
@@ -10,7 +10,7 @@ user-invocable: false
 
 A plan is the contract between the Architect and the implementation agent — every ambiguity in it becomes a design judgment made at implementation time, by the wrong agent. Plan templates keep that contract tight: each one defines the structure, sections, and writing standards for one kind of plan, and the Architect loads the right template during its Planning phase instead of improvising a document shape.
 
-This skill is the canonical reference for creating those templates. Every plan template draws its sections from the Section Catalog defined here — no template invents sections outside the catalog. If a gap exists, God surfaces it and the user decides whether to extend the catalog first.
+This skill is the canonical reference for creating those templates. Every plan template draws its sections from the Section Catalog defined here — no template invents sections outside the catalog. If a gap exists, Demiurge surfaces it and the user decides whether to extend the catalog first.
 
 ## Plan Template Skill Format
 
@@ -193,7 +193,7 @@ Writing standards are the guardrails that prevent the Architect from producing v
 
 ## Composition Rules
 
-These rules govern how God selects and orders sections when composing a plan template from the Section Catalog.
+These rules govern how Demiurge selects and orders sections when composing a plan template from the Section Catalog.
 
 ### Mandatory sections
 
@@ -254,7 +254,7 @@ Sections appear in this order within the plan document. The order follows the re
 
 ### Template type heuristics
 
-When God composes a plan template, use these heuristics for common types:
+When Demiurge composes a plan template, use these heuristics for common types:
 
 | Template type | Applicability | Included sections (by number) | Omitted sections (by number) | Notes |
 |---|---|---|---|---|

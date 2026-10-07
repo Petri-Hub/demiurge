@@ -1,6 +1,6 @@
 ---
 name: forge-principles
-description: Canonical authoring principles God consults while producing any artifact — the instruction-design tradeoffs that make agent files, pipeline skills, plan templates, and handoff skills reliable, not just well-formed. Use this skill as a reference during any forge pipeline, before writing artifact content and again during adversarial self-review. Covers goal-over-procedure, specificity budget, instruction load, positional weighting, positive framing, rationale-bearing rules, example anchoring, structural restraint, and consistency. Reference only — it has no phases and is never executed as a flow.
+description: Canonical authoring principles Demiurge consults while producing any artifact — the instruction-design tradeoffs that make agent files, pipeline skills, plan templates, and handoff skills reliable, not just well-formed. Use this skill as a reference during any forge pipeline, before writing artifact content and again during adversarial self-review. Covers goal-over-procedure, specificity budget, instruction load, positional weighting, positive framing, rationale-bearing rules, example anchoring, structural restraint, and consistency. Reference only — it has no phases and is never executed as a flow.
 user-invocable: false
 ---
 
@@ -10,7 +10,7 @@ user-invocable: false
 
 This skill exists because a structurally perfect artifact can still behave badly. An agent file can pass every template checklist and still drift — its constraints phrased as prohibitions the model activates rather than suppresses, its one load-bearing rule buried mid-list where attention is thinnest. Structure is necessary and not sufficient. This skill owns the rest: the **wording** — whether the instructions inside an artifact are written in a way a model will actually follow.
 
-This is a **reference, not a pipeline**. It has no phases and is never executed as a flow. God loads it before writing artifact content (Production in creation/update pipelines; Intake in validation) and applies its Review Lens during every review pass (Self-review in creation/update; Evaluation in validation).
+This is a **reference, not a pipeline**. It has no phases and is never executed as a flow. Demiurge loads it before writing artifact content (Production in creation/update pipelines; Intake in validation) and applies its Review Lens during every review pass (Self-review in creation/update; Evaluation in validation).
 
 Every principle below is a **tradeoff axis with two failure poles**, not a law. Applied deliberately, they raise artifact quality on the first draft. Applied dogmatically, they become their own failure mode — which is why each names both poles and a heuristic for leaning, never a rule.
 
@@ -56,7 +56,7 @@ Compact guidance for authoring artifacts, with the reason each principle holds. 
 
 - **Show the shape, don't over-fit it.** Examples are the highest-bandwidth way to convey format, but anchoring is strong and grows with model capability — the model mimics whatever the example happens to contain, including accidents. Choose examples that are representative rather than exceptional, vary them so no single incidental pattern dominates, and keep role framing general enough that the example illustrates without narrowing.
 
-- **Structure for navigation, not ceremony.** Section headers, tables, and consistent ordering let a model find what it needs and let God itself reason over a uniform fleet — real value. But structure past the point of findability is cost without return, and its payoff shrinks as models improve. Keep the uniform template; resist adding structure that exists only to look rigorous.
+- **Structure for navigation, not ceremony.** Section headers, tables, and consistent ordering let a model find what it needs and let Demiurge itself reason over a uniform fleet — real value. But structure past the point of findability is cost without return, and its payoff shrinks as models improve. Keep the uniform template; resist adding structure that exists only to look rigorous.
 
 - **Author for consistency; state precedence.** Conflicting directives are among the most damaging defects because the model cannot reliably choose between them and will apply them inconsistently. During Self-review, read the draft specifically for Identity-versus-Constraints and Constraints-versus-Pipeline contradictions. Where two rules can legitimately collide at runtime, write the tie-breaker explicitly rather than trusting the model to infer it.
 
@@ -79,7 +79,7 @@ During adversarial Self-review, attack the draft against these dimensions, readi
 
 ## **Scope & Boundaries**
 
-- **Applies to every artifact God forges** — agent files, pipeline skills, plan templates, handoff skills, MDC rule sets. It is the shared craft layer beneath all of them.
+- **Applies to every artifact Demiurge forges** — agent files, pipeline skills, plan templates, handoff skills, MDC rule sets. It is the shared craft layer beneath all of them.
 - **HITL gate design is out of scope here.** The principles for *where and how many* human gates a flow should carry are a pipeline-authoring concern and live in `forge-pipeline`. Consult them when the artifact being authored is an interactive pipeline; this skill governs instruction wording, not gate topology.
 - **These principles are priors, not universal laws.** Treat them as strong defaults, and prefer confirming a wording choice empirically over trusting the prior when the stakes are high.
 - **The principles interact.** "Attach the why" spends tokens against "Instruction load"; "Show the shape" aids specificity but risks anchoring. They are a system of tradeoffs, not independent switches — which is why every one is framed as an axis with a heuristic, never a fixed rule.

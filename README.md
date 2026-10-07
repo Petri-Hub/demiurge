@@ -2,7 +2,7 @@
 
 <br>
 
-<h3 align="center">15 agents and 58 skills for Claude Code.<br>Plain markdown, installed with symlinks</h3>
+<h3 align="center">A meta-harness that creates other agents.<br>An agent whose only job is writing the instructions of the others</h3>
 
 <p align="center">
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-D97757?logo=claude&logoColor=white" /> <a href="https://github.com/Petri-Hub/demiurge/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/Petri-Hub/demiurge" /></a>
@@ -12,21 +12,15 @@
 
 ## About
 
-> **TL;DR:** a harness for Claude Code, made of plain markdown, built around one agent that doesn't write code. I call it God, and its job is to write the instructions of every other agent: their system prompts, the pipelines they follow, the plan templates and the handoff contracts. Around it sits the roster I run: an Orchestrator that dispatches an Architect, an Executor and the reviewers that attack their work, with every agent handing work to the next as files.
+> **TL;DR:** a harness for Claude Code, made of plain markdown, built around one agent that doesn't write code. I call it God, and its job is to write the instructions of every other agent: their system prompts, the pipelines they follow, the plan templates and the handoff contracts. This is not a framework: it has no versioned interface, and the roster around it was built for my own work, so expect to edit the markdown to fit yours.
 
-## The idea
+## The idea, in two paragraphs
 
-<img alt="God loads the forge skills, writes the agents, pipelines, plan templates, handoff contracts and rule systems, and reviews the evolution notes the agents record" src="assets/god.png" />
-
-<br>
+<img alt="You describe the work to God, the meta-agent, which writes and maintains the harness: agents, pipelines, plan templates and handoffs" src="assets/idea.png" />
 
 **A model computes what comes next from everything that came before:** the system prompt, the skill it loaded, the plan it was handed, the handoff it read. So the quality of what comes out depends on how well that *before* is written, and the real question is what the best possible instructions look like for the work you want out.
 
-**God is the agent I built to answer that question in files.** It is a regular Claude Code agent, but it never touches your code. You tell it what you need, say a new agent, a pipeline or a plan template, and it works out with you the best artifact it can write for another agent to read and follow. It does the same to check or improve one that already exists.
-
-**It also closes a loop. At the end of every run, each agent writes down the friction it hit in its own instructions,** and God reviews those notes in batches and fixes the instructions. That is what makes this a meta-harness: one agent shapes the environment of all the others, and what the others learn flows back to it.
-
-**Current frontier models are good at following a path.** A pipeline is a path, with phases, entry and exit conditions and gates, and inside each phase the model is free to adapt. You keep the flexibility of the model and it gets a direction to follow.
+**If that is true, what if you had an agent whose only job was to write that *before*?** It would know how to write a system prompt, a pipeline, a plan template or a handoff so that another agent reads it and follows it. Current frontier models are good at following a path, and a pipeline is one: phases, gates and exit conditions, with the model free to adapt inside each phase. That agent is God, and the harness around it is what it produces.
 
 ## Don't use this
 
@@ -72,20 +66,6 @@ The Orchestrator is the entry point: it proposes the next step, dispatches the s
 
 Skills are grouped by prefix: `pipeline-` for flows, `forge-` for templates, `workspace-` for layout, naming and git lifecycle, `handoff-` for what each reviewer receives, `specialization-` for tools (tmux, Maestro, Slidev, Lighthouse and axe, agent-browser, frontend design) and `teacher-` for course state and source ranking.
 
-## The forge skills
-
-They define the structure of every agent, pipeline, plan template, handoff and rule system in the kit, and each one carries the quality checklist an artifact has to pass before God is allowed to save it.
-
-| Skill | Used when |
-|---|---|
-| `forge-principles` | Before writing the content of any artifact, and on every review pass. It covers the wording, not the structure: how to phrase an instruction so a model follows it. Reference only, it has no phases |
-| `forge-agent` | Creating, validating or updating an agent file: section order, frontmatter, delegation rules |
-| `forge-pipeline` | Creating, validating or updating a pipeline skill: phases, actions, exit conditions, gate design |
-| `forge-plan` | Creating a catalog-driven plan template, for plans with entities, use cases and API contracts |
-| `forge-plan-open` | Creating an open-structure plan template, for infrastructure, tooling, CI/CD and migrations, where the structure is specific to the domain |
-| `forge-handoff` | Creating a handoff skill, the contract between two agents: payload design and the rule of passing a path instead of copying content |
-| `forge-mdcs` | Creating a project's rule system, the `.claude/rules/` tiers and the root `CLAUDE.md` |
-
 ## When it is worth it
 
 It is worth it when a mistake is expensive: fintech, distributed systems, anything mission critical. You trade tokens and time for review before and after the work. A plan is not one model's first draft, it gets attacked by other agents. Code is not only implemented, it can come back with the findings of four reviewers. The point is to stay away from the keyboard and still deliver something you can trust.
@@ -94,20 +74,7 @@ If your work is not critical, it is probably not worth the cost. Plain Claude Co
 
 ## What it produced
 
-Counted on the workspace the agents kept while I used this, from 13 May to 2 September 2026, the last commit in my copy.
-
-| What | Count |
-|---|---|
-| Plan files, in feature workspaces | 149, across 120 workspaces |
-| Handoff files between agents | 601 |
-| Audits, with their findings | 27 audits, 261 findings |
-| Incident workspaces, with their investigation files | 10 workspaces, 16 files |
-| Research files, and documentation files from the Librarian | 122 and 71 |
-| Evolution notes written by the agents | 876 |
-| Markdown files in the workspace | 3,254, about 241,500 lines |
-| Commits to the workspace repository | 1,327 |
-
-The kit itself is 15 agent files and 58 skills, 73 markdown files and about 17,000 lines.
+I used this day to day for almost four months in 2026, in a fintech environment, and the agents produced 149 plan files in 120 feature workspaces, 601 handoffs, 27 audits with 261 findings and 3,254 markdown files, counting my copy of the workspace. The version published here has 15 agents and 58 skills.
 
 ## License
 

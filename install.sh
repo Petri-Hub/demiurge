@@ -6,9 +6,22 @@ TARGET="${CLAUDE_HOME:-$HOME/.claude}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 
 usage() {
-  echo "Usage: ./install.sh"
+  echo "Usage: ./install.sh [--demiurge]"
   echo "Links demiurge agents and skills into \$CLAUDE_HOME (default: ~/.claude)."
+  echo "  --demiurge  link only the Demiurge agent and the skills it uses"
   echo "To remove them, run ./uninstall.sh."
+}
+
+wanted_agent() {
+  [ "$MODE" = all ] || [ "$1" = Demiurge.md ]
+}
+
+wanted_skill() {
+  [ "$MODE" = all ] && return 0
+  case "$1" in
+    forge-*|pipeline-demiurge-*|workspace-structural-protocol|workspace-lifecycle-protocol|workspace-evolution-protocol) return 0 ;;
+  esac
+  return 1
 }
 
 link() {
@@ -26,18 +39,22 @@ link() {
   echo "linked $destination"
 }
 
+MODE=all
 case "${1:-}" in
   "") ;;
+  --demiurge) MODE=demiurge ;;
   -h|--help) usage; exit 0 ;;
   *) usage; exit 1 ;;
 esac
 
 mkdir -p "$TARGET/agents" "$TARGET/skills"
 for agent in "$REPO"/agents/*.md; do
+  wanted_agent "$(basename "$agent")" || continue
   link "$agent" "$TARGET/agents/$(basename "$agent")"
 done
 for skill in "$REPO"/skills/*/; do
   skill="${skill%/}"
+  wanted_skill "$(basename "$skill")" || continue
   link "$skill" "$TARGET/skills/$(basename "$skill")"
 done
 

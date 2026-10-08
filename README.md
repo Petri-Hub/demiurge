@@ -24,57 +24,80 @@
 
 ## Don't use this
 
-> **Don't use these agents. Use the one that makes them.** This harness was built around my work: my agents, my HITL gates, my way of reviewing. The piece worth taking is **Demiurge**, the agent that creates the others, together with the forge skills.
+> **Don't use these agents. Use the one that makes them.**
 
-I built it for a financial system, where I needed to read and understand what was going to be built before it was built. That is why there is an Architect whose plan I review, and an Executor whose code can go through four reviewers before it reaches me. There is a Scribe for writing anything from a post-mortem to a simple integration report, and a Crawler that gathers context from other websites and maps their features before I recreate the product. Those are my needs. Yours are different, and you would spend your time fighting agents shaped around mine.
+Everything else in this repository is the roster I built with Demiurge for my own work: my agents, my HITL gates, my way of reviewing. It is here to show what Demiurge produces. Your work is different, and you would spend your time fighting agents shaped around mine, so install Demiurge alone and let it build yours.
 
-## How to use this
+## Install
 
-Take **Demiurge**, the `pipeline-demiurge-*` skills, the `forge-*` skills and the three `workspace-*` skills Demiurge uses to record its own notes. Leave the rest, or read it as examples of what Demiurge produces.
-
-Start Claude Code with `claude --agent Demiurge` and tell it what you need: an agent, a pipeline, a plan template, a handoff contract or a rule system. It interviews you first, writes the draft, then attacks its own draft against the forge checklist before handing it over. Demiurge needs the Context7 MCP server configured in Claude Code.
-
-`install.sh` links the whole kit into `~/.claude`. To take only the Demiurge subset, link those folders by hand.
+You need Claude Code, git and bash.
 
 ```sh
-git clone https://github.com/Petri-Hub/demiurge.git && cd demiurge && ./install.sh
+git clone https://github.com/Petri-Hub/demiurge.git && cd demiurge
+./install.sh --demiurge   # Demiurge and the 26 skills it uses
+./install.sh              # or the whole harness
+./uninstall.sh            # removes only the links install.sh created
 ```
 
-Agents read their skills from `~/.claude/skills`, so allow `Read(~/.claude/skills/**)` in your `settings.json`. `./uninstall.sh` removes only the links it created. It does not restore anything `install.sh` moved to `~/.claude/.demiurge-backup/`.
+The installer links the files into `~/.claude` instead of copying them, so a `git pull` updates them. Anything already in the way is moved to `~/.claude/.demiurge-backup/`, and `uninstall.sh` tells you it is there without restoring it.
+
+Agents read their skills from `~/.claude/skills`, so allow `Read(~/.claude/skills/**)` in `~/.claude/settings.json`. Demiurge also checks library and framework behavior through Context7, and it expects the server under the name `context-7`, with the hyphen:
+
+```sh
+claude mcp add --scope user context-7 -- npx -y @upstash/context7-mcp
+```
+
+The key is optional. Add `--api-key <key>` at the end for higher rate limits.
+
+The whole harness needs a few more servers. Playwright, next-devtools and NotebookLM start on their own through `npx` or `uvx` when their agent runs, and the Architect also expects the `sentrux` binary on your path.
+
+## Using Demiurge
+
+Start Claude Code with Demiurge as the main agent, from the folder where you keep your agents, either `~/.claude` or your own harness repository. It writes into `agents/` and `skills/` under that folder.
+
+```sh
+claude --agent Demiurge
+```
+
+Then describe what you need in plain words, for example:
+
+> Create an agent that reviews database migrations before they merge. It should block any migration that drops a column the code still reads.
+
+It asks its questions before writing anything, drafts the file against the template for that kind of artifact, and reviews its own draft before handing it over. The same goes for pipelines, plan templates, handoff contracts and a project's rule system, and it can validate or update any of them that already exist.
 
 ## How it works
 
-The Orchestrator is the entry point: it proposes the next step, dispatches the specialists and stops at the gates. The Architect's plan is attacked by two reviewers before you read it. The Executor's code can be attacked by four, each switched on per run: quality, security, tests, and whether the code honors the plan's behavioral contracts. Demiurge and the Teacher you call directly.
+This is the roster I used day to day, built for a financial system where I needed to read and understand what was going to be built before it was built.
 
 <img alt="Organogram: You reach Demiurge, the Orchestrator and the Teacher. The Orchestrator dispatches the Architect, the Executor and on-demand specialists. Two reviewers attack the Architect's plan and four attack the Executor's code" src="assets/roster.png" />
+
+The Orchestrator is the entry point: it proposes the next step, dispatches the specialists and stops at the gates. The Architect's plan is attacked by two reviewers before you read it, and the Executor's code can be attacked by four, each switched on per run: quality, security, tests, and whether the code honors the plan's behavioral contracts. Around them, a Scribe writes anything from a post-mortem to an integration report, and a Crawler maps the features of another product before it is rebuilt. Demiurge and the Teacher you call directly.
+
+## When it is worth it
+
+When a mistake is expensive: fintech, distributed systems, anything mission critical. You trade tokens and time for review before and after the work, so you can stay away from the keyboard and still trust what comes back. For everything else, plain Claude Code with a few skills is faster and cheaper.
+
+## What it produced
+
+I used this day to day for almost four months in 2026, in a fintech environment, and the agents produced 149 plan files in 120 feature workspaces, 601 handoffs, 27 audits with 261 findings and 3,254 markdown files, counting my copy of the workspace. The version published here has 15 agents and 58 skills.
 
 ## Glossary
 
 | Entity | What it is |
 |---|---|
-| **Agent** | A markdown file with a system prompt, a model, a tool list and the agents it is allowed to call. Lives in `agents/` |
+| **Agent** | A markdown file with a system prompt, a model, a tool list and the agents it may call. Lives in `agents/` |
 | **Skill** | A markdown file an agent loads on demand instead of carrying it in its prompt. Lives in `skills/<name>/SKILL.md` |
-| **Pipeline** | A skill describing one execution flow: phases, each with a goal, actions, things to avoid and exit conditions |
-| **Forge skill** | The template and the quality checklist for one kind of artifact. Demiurge's reference material |
-| **Plan template** | What the Architect fills in to write a plan. Either catalog-driven, for domain features, or open-structure, for tooling and infrastructure |
-| **Handoff** | A typed markdown file one agent writes for another, with a purpose, a context, a payload table and a validation block. The receiver reads it from disk |
-| **Workspace** | `.workspace/`, a git repository beside your project where plans, handoffs, research, docs, audits, crawls and evolution notes live. Each agent knows which folders it may write to |
-| **HITL gate** | A point where an agent stops and asks you. The Orchestrator runs at one of three levels: Supervised, Guided (the default) or Autonomous |
-| **Behavioral contract** | A numbered, testable statement in a plan, such as BC-01. The Refinement reviewer checks the code and the tests against them |
-| **Evolution note** | A short note an agent writes at the end of a run about friction in its own instructions. Demiurge reviews them in batches |
-| **Rule system** | `.claude/rules/` plus the root `CLAUDE.md` that orients the agents, in three tiers: foundation, concerns and components |
+| **Pipeline** | A skill describing one flow: phases, each with a goal, actions, things to avoid and exit conditions |
+| **Forge skill** | The template and the quality checklist Demiurge follows for one kind of artifact |
+| **Plan template** | What the Architect fills in to write a plan, catalog-driven for domain features or open-structure for tooling |
+| **Handoff** | A typed markdown file one agent writes for another, read from disk by the receiver |
+| **Workspace** | `.workspace/`, a git repository beside your project where plans, handoffs, audits and crawls live |
+| **HITL gate** | A point where an agent stops and asks you. The Orchestrator runs Supervised, Guided (the default) or Autonomous |
+| **Behavioral contract** | A numbered, testable statement in a plan, such as BC-01, checked against the code by the Refinement reviewer |
+| **Evolution note** | A note an agent writes at the end of a run about friction in its own instructions, reviewed by Demiurge in batches |
+| **Rule system** | A project's `.claude/rules/` plus the root `CLAUDE.md` that orients the agents |
 
-Skills are grouped by prefix: `pipeline-` for flows, `forge-` for templates, `workspace-` for layout, naming and git lifecycle, `handoff-` for what each reviewer receives, `specialization-` for tools (tmux, Maestro, Slidev, Lighthouse and axe, agent-browser, frontend design) and `teacher-` for course state and source ranking.
-
-## When it is worth it
-
-It is worth it when a mistake is expensive: fintech, distributed systems, anything mission critical. You trade tokens and time for review before and after the work. A plan is not one model's first draft, it gets attacked by other agents. Code is not only implemented, it can come back with the findings of four reviewers. The point is to stay away from the keyboard and still deliver something you can trust.
-
-If your work is not critical, it is probably not worth the cost. Plain Claude Code with a few skills is faster and cheaper, and for most work that is the better trade.
-
-## What it produced
-
-I used this day to day for almost four months in 2026, in a fintech environment, and the agents produced 149 plan files in 120 feature workspaces, 601 handoffs, 27 audits with 261 findings and 3,254 markdown files, counting my copy of the workspace. The version published here has 15 agents and 58 skills.
+Skills are grouped by prefix: `pipeline-` for flows, `forge-` for templates, `workspace-` for the workspace, `handoff-` for what each reviewer receives, `specialization-` for tools and `teacher-` for courses.
 
 ## License
 

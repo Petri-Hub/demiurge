@@ -30,7 +30,7 @@ You can start with a problem you see in your own workflow. Demiurge asks for the
 
 Your coding plans keep leaving decisions ambiguous, drifting from the project's architecture, and using different names for the same concepts.
 
-```bash
+```dotenv
 # claude --agent Demiurge
 
 > Create an Architect agent with one planning pipeline. Before it
@@ -39,7 +39,7 @@ Your coding plans keep leaving decisions ambiguous, drifting from the project's 
   drift, and one for risks covered by the OWASP Top 10.
 ```
 
-```bash
+```dotenv
 # claude --agent Architect
 
 > Plan a password reset flow for this application.
@@ -49,7 +49,7 @@ Your coding plans keep leaving decisions ambiguous, drifting from the project's 
 
 Your onboarding screens feel hard to use, and you want to see where a first-time customer gets stuck.
 
-```bash
+```dotenv
 # claude --agent Demiurge
 
 > Create a Customer agent that opens my running application in a
@@ -58,7 +58,7 @@ Your onboarding screens feel hard to use, and you want to see where a first-time
   each issue with the violated principle and a suggested improvement.
 ```
 
-```bash
+```dotenv
 # claude --agent Customer
 
 > Go through the customer onboarding flow from the first visit to
@@ -71,7 +71,7 @@ Your onboarding screens feel hard to use, and you want to see where a first-time
 
 After a few runs, Architect's plans start covering work you didn't ask for.
 
-```bash
+```dotenv
 # claude --agent Demiurge
 
 > Architect's plans keep expanding beyond my request. Update its
@@ -81,7 +81,7 @@ After a few runs, Architect's plans start covering work you didn't ask for.
   Then it can write the plan within the agreed scope.
 ```
 
-```bash
+```dotenv
 # claude --agent Architect
 
 > Plan a CSV export for the billing dashboard.

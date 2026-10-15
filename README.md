@@ -235,10 +235,6 @@ Knowledge is standing reference the phases consult repeatedly — catalogs, crit
 | Visual / responsive  | Do controls remain usable at narrow widths?       |
 ```
 
-#### Flow
-
-Flow is the map the agent loads before walking: every phase, decision, and loop in one diagram. Without it, the agent discovers the pipeline's shape phase by phase and can't anticipate what comes next.
-
 #### Phases
 
 Phases are the behavioral core. Each defines what the phase must produce (Goal), the intent-level work (Actions), the failure modes to avoid (Avoid), and the evidence that it's done (Exit) — the model reads the whole phase and forms intent; it doesn't execute micro-steps.

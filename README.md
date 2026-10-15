@@ -117,17 +117,17 @@ And some pipelines I've created over time that you may be interested in:
 
 ## Agent and pipeline structure
 
-The sections below show how an agent prompt and its pipeline are structured, and what each part contributes. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md), applied to an imaginary onboarding audit.
+The sections below show how an agent prompt and its pipeline are structured, and what each part contributes. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md), applied to an imaginary onboarding audit — one agent illustrating a shape every agent shares.
 
 > Imagine asking Quality Engineer to audit customer onboarding on a running staging site: account creation, email verification, company setup, and confirmation. It inspects each screen against stated criteria and leaves findings another engineer can reproduce.
 
 ### Agent
 
-The agent file stays loaded throughout the run. It defines the agent's judgment, its tools, and which pipeline to load per request.
+Every agent file follows the same sections in the same order. It stays loaded throughout the run: who the agent is, who it answers to, what it may use, what it must never do, and which pipeline to load per request.
 
 #### Identity
 
-Identity gives the agent a job and a point of view. Quality Engineer is an independent reviewer: it reports failures it can demonstrate with evidence, and never redesigns the screens it inspects.
+Identity is the first prose the model reads, and it seeds every downstream decision: the agent's job, what it explicitly does not do, and the mental model for how it should think.
 
 ```md
 ## Identity
@@ -141,7 +141,7 @@ Audit against stated criteria; leave fixes to the implementation agent.
 
 #### Communication
 
-Communication places the agent among the others. Quality Engineer takes requests directly or from an Orchestrator, may call on Librarian for documentation research, and never invokes agents that would implement the fixes.
+Communication declares the agent's position in the roster: who can reach it, who it can reach, and who it must never reach. Without it, agents call agents they shouldn't — circular delegations, duplicated work, bypassed gates.
 
 ```md
 ## Communication
@@ -159,7 +159,7 @@ Communication places the agent among the others. Quality Engineer takes requests
 
 #### Tools
 
-Tools lists what the agent may use and when. Specialized skills carry the syntax and pitfalls that working from memory gets wrong, so the agent loads them before touching the tools they cover.
+Tools is a decision guide, not a list: each entry answers when to reach for a tool and why. Skills are referenced by install path, and the agent reads the file when the trigger applies.
 
 ```md
 ## Tools
@@ -172,7 +172,7 @@ Tools lists what the agent may use and when. Specialized skills carry the syntax
 
 #### Constraints
 
-Constraints protect the judgment. Quality Engineer must capture what happened before calling something a defect, and must say exactly where its coverage ends when permissions block a check.
+Constraints are guardrails against specific failure modes — the planner that starts coding, the reviewer that starts designing. Every constraint pairs its boundary with the reason; a rule without one is waiting to be circumvented.
 
 ```md
 ## Constraints & Guidelines
@@ -184,7 +184,7 @@ Constraints protect the judgment. Quality Engineer must capture what happened be
 
 #### Pipeline routing
 
-The same agent handles different requests without mixing their steps. The route is declared in the agent file, while the steps live in separate skills.
+Pipeline is where "who you are" becomes "what you do." One agent serves several contexts, so the file carries only a routing table — one row per pipeline — while each pipeline's phases live in its own skill, loaded on demand.
 
 ```md
 ## Pipeline
@@ -198,7 +198,7 @@ The same agent handles different requests without mixing their steps. The route 
 
 #### References
 
-References name the books and ideas behind the agent's judgment, so its criteria trace back to something beyond the prompt.
+References anchor the agent's reasoning style. A reference with its reason teaches why it shapes the role; without one, it's decoration.
 
 ```md
 ## References
@@ -209,11 +209,11 @@ References name the books and ideas behind the agent's judgment, so its criteria
 
 ### Pipeline
 
-For the onboarding request, Quality Engineer loads Web Audit. That file says what to produce, which criteria to apply, and how to move through the work.
+A pipeline skill specifies a single execution flow, loaded on demand. For the onboarding request, Quality Engineer loads Web Audit — what it produces, which criteria apply, and how the work moves.
 
 #### Purpose
 
-Purpose states the deliverable: an evidence-backed audit record. It does not create executable tests or decide whether a limitation is acceptable.
+Purpose answers the two questions the agent has on loading: what am I about to do, and why this pipeline instead of another. It states the deliverable, the trigger, and the mode — then stops; the phases belong to later sections.
 
 ```md
 ## Purpose
@@ -225,7 +225,7 @@ Do not write executable tests or change the application.
 
 #### Knowledge
 
-Knowledge carries the audit criteria, so “check the onboarding flow” means checking error recovery, copy consistency, and layout — not giving each screen a vague score. A concern can be switched off per run; interaction-gated checks run only when permitted.
+Knowledge is standing reference the phases consult repeatedly — catalogs, criteria, rubrics. It travels with the pipeline and loads only when the pipeline runs, instead of bloating the always-loaded agent file. If more than one pipeline needs the same material, it belongs in the agent file.
 
 ```md
 ## Knowledge
@@ -239,11 +239,11 @@ Knowledge carries the audit criteria, so “check the onboarding flow” means c
 
 #### Flow
 
-Web Audit follows `Intake → Audit → Report`. Intake resolves target, scope, and permissions, and stops if the site can't be reached. Audit walks each state one at a time. Report finalizes the record, naming both coverage and gaps.
+Flow is the map the agent loads before walking: every phase, decision, and loop in one diagram. Without it, the agent discovers the pipeline's shape phase by phase and can't anticipate what comes next.
 
 #### Phases
 
-Each phase has a goal, actions, things to avoid, and exit conditions. The structure lets the agent expand work inside a phase without skipping the phases that follow:
+Phases are the behavioral core. Each defines what the phase must produce (Goal), the intent-level work (Actions), the failure modes to avoid (Avoid), and the evidence that it's done (Exit) — the model reads the whole phase and forms intent; it doesn't execute micro-steps.
 
 ```md
 ### Phase 2 — Audit
@@ -271,7 +271,7 @@ moving to the next one.
 
 #### Constraints
 
-The pipeline restates its boundaries where they matter most: at the point of judgment.
+Constraints hold invariants spanning all phases of this flow yet belonging to no single phase — and to no sibling pipeline. The test: repeated in more than one phase's Avoid, it's a pipeline constraint; applying to more than one pipeline, it's an agent constraint.
 
 ```md
 ## Constraints

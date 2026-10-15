@@ -4,24 +4,13 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET="${CLAUDE_HOME:-$HOME/.claude}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
+source "$REPO/shared.sh"
 
 usage() {
   echo "Usage: ./install.sh [--demiurge]"
-  echo "Links demiurge agents and skills into \$CLAUDE_HOME (default: ~/.claude)."
-  echo "  --demiurge  link only the Demiurge agent and the skills it uses"
+  echo "Links the Demiurge agent and its skills into \$CLAUDE_HOME (default: ~/.claude)."
+  echo "  --demiurge  accepted for compatibility; this is now the default"
   echo "To remove them, run ./uninstall.sh."
-}
-
-wanted_agent() {
-  [ "$MODE" = all ] || [ "$1" = Demiurge.md ]
-}
-
-wanted_skill() {
-  [ "$MODE" = all ] && return 0
-  case "$1" in
-    forge-*|pipeline-demiurge-*|workspace-structural-protocol|workspace-lifecycle-protocol|workspace-evolution-protocol) return 0 ;;
-  esac
-  return 1
 }
 
 link() {
@@ -39,22 +28,17 @@ link() {
   echo "linked $destination"
 }
 
-MODE=all
 case "${1:-}" in
-  "") ;;
-  --demiurge) MODE=demiurge ;;
+  ""|--demiurge) ;;
   -h|--help) usage; exit 0 ;;
   *) usage; exit 1 ;;
 esac
 
 mkdir -p "$TARGET/agents" "$TARGET/skills"
-for agent in "$REPO"/agents/*.md; do
-  wanted_agent "$(basename "$agent")" || continue
-  link "$agent" "$TARGET/agents/$(basename "$agent")"
-done
-for skill in "$REPO"/skills/*/; do
+link "$REPO/agents/$DEMIURGE_AGENT" "$TARGET/agents/$DEMIURGE_AGENT"
+for skill in "$REPO"/skills/*/ "$REPO"/examples/workspace/*/; do
   skill="${skill%/}"
-  wanted_skill "$(basename "$skill")" || continue
+  is_demiurge_skill "$(basename "$skill")" || continue
   link "$skill" "$TARGET/skills/$(basename "$skill")"
 done
 

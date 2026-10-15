@@ -4,6 +4,7 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET="${CLAUDE_HOME:-$HOME/.claude}"
 BACKUPS="$TARGET/.demiurge-backup"
+source "$REPO/shared.sh"
 
 usage() {
   echo "Usage: ./uninstall.sh"
@@ -25,12 +26,10 @@ case "${1:-}" in
   *) usage; exit 1 ;;
 esac
 
-for agent in "$REPO"/agents/*.md; do
-  unlink_owned "$TARGET/agents/$(basename "$agent")"
-done
-for skill in "$REPO"/skills/*/; do
-  skill="${skill%/}"
-  unlink_owned "$TARGET/skills/$(basename "$skill")"
+unlink_owned "$TARGET/agents/$DEMIURGE_AGENT"
+for skill in "$TARGET"/skills/*; do
+  is_demiurge_skill "$(basename "$skill")" || continue
+  unlink_owned "$skill"
 done
 
 if [ -d "$BACKUPS" ] && [ -n "$(ls -A "$BACKUPS")" ]; then

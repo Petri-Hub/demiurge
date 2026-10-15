@@ -115,11 +115,11 @@ And some pipelines I've created over time that you may be interested in:
 - [Executor Execution](examples/executor/skills/pipeline-executor-execution/SKILL.md) — the pipeline from plan to tested code.
 - [Crawler Direct Crawl](examples/crawler/skills/pipeline-crawler-direct-crawl/SKILL.md) — the pipeline from live app to view records.
 
-## Agent and pipeline structure
+## Anatomy of an agent
 
-The sections below show how an agent prompt and its pipeline are structured, and what each part contributes. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md), applied to an imaginary onboarding audit — one agent illustrating a shape every agent shares.
+Every agent shares the same anatomy — the sections below, in the same order — and every pipeline follows the same flow. [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md) illustrate each part.
 
-> Imagine asking Quality Engineer to audit customer onboarding on a running staging site: account creation, email verification, company setup, and confirmation. It inspects each screen against stated criteria and leaves findings another engineer can reproduce.
+> Running example: Quality Engineer auditing customer onboarding on a staging site.
 
 ### Agent
 

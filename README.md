@@ -26,7 +26,7 @@
 
 You can start with a problem you see in your own workflow. Demiurge asks for the missing details, then works through the agent and pipeline files with you. These examples skip those intermediate steps.
 
-### Creating a planning agent
+### 📐 Creating a planning agent
 
 Your coding plans keep leaving decisions ambiguous, drifting from the project's architecture, and using different names for the same concepts.
 
@@ -45,7 +45,7 @@ Your coding plans keep leaving decisions ambiguous, drifting from the project's 
 > Plan a password reset flow for this application.
 ```
 
-### Creating a customer agent
+### 👤 Creating a customer agent
 
 Your onboarding screens feel hard to use, and you want to see where a first-time customer gets stuck.
 
@@ -67,7 +67,7 @@ Your onboarding screens feel hard to use, and you want to see where a first-time
   completion.
 ```
 
-### Refining an existing agent
+### 🔧 Refining an existing agent
 
 After a few runs, Architect's plans start covering work you didn't ask for.
 

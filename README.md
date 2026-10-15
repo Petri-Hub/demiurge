@@ -119,6 +119,8 @@ You own the tests and findings, not the application under test.
 Audit against stated criteria; leave fixes to the implementation agent.
 ```
 
+> Note: Simplified example.
+
 #### Communication
 
 Communication places the agent among the others. You can ask Quality Engineer directly, or an Orchestrator can send it an audit. It may ask Librarian to check a standard it needs to apply. The caller receives its findings and decides what work follows.
@@ -137,6 +139,8 @@ Communication places the agent among the others. You can ask Quality Engineer di
 - Specialist agents that would implement the fixes.
 ```
 
+> Note: Simplified example.
+
 #### Constraints
 
 Constraints protect the judgment. If the verification form looks broken, Quality Engineer must capture what happened before calling it a defect. If the staging site is read-only, it can inspect the form but must report that submission behavior was not examined. The report should say exactly where its coverage ends.
@@ -148,6 +152,8 @@ Constraints protect the judgment. If the verification form looks broken, Quality
 - Never claim a pass or a failure you did not observe.
 - If permissions prevent a check, record it as a coverage gap.
 ```
+
+> Note: Simplified example.
 
 #### Pipeline routing
 
@@ -162,6 +168,8 @@ The same agent handles different requests without mixing their steps. “Create 
 | Run existing tests | `pipeline-quality-engineer-test-execution` |
 | Audit a running web app | `pipeline-quality-engineer-web-audit` |
 ```
+
+> Note: Simplified example.
 
 ### Pipeline
 
@@ -179,6 +187,8 @@ Produce an evidence-backed record of findings and coverage.
 Do not write executable tests or change the application.
 ```
 
+> Note: Simplified example.
+
 #### Knowledge
 
 The pipeline carries the audit criteria so that “check the onboarding flow” means more than giving each screen a vague score. Its catalog includes accessibility, responsive layout, copy, forms, and error states. For example, Quality Engineer can check whether an invalid email receives useful guidance, whether the company form fits a narrow viewport, and whether the UI calls the same person a “customer” on one screen and a “client” on the next. A concern can be turned off for a particular run; a check that needs interaction or data changes runs only when the configured permissions allow it.
@@ -192,6 +202,8 @@ The pipeline carries the audit criteria so that “check the onboarding flow” 
 | Content & copy | Does the same concept keep the same name? |
 | Visual / responsive | Do controls remain usable at narrow widths? |
 ```
+
+> Note: Simplified example.
 
 #### Flow
 
@@ -224,6 +236,8 @@ moving to the next one.
 - [ ] Every state is audited or skipped with a reason.
 - [ ] Each audited state has its findings and evidence saved.
 ```
+
+> Note: Simplified example.
 
 A hypothetical finding might say that an expired verification code produces “Something went wrong” with no way to request a new one. The record would include the screen, steps to reproduce it, the relevant error-recovery criterion, and captured evidence. Someone fixing onboarding can then act on the observation without guessing what the auditor saw.
 

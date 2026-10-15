@@ -95,6 +95,21 @@ The hard part was finding a structure that lets current models expand the work i
 
 <img alt="An agent contains identity, knowledge, communication, tools and skills, constraints and guidelines, references, and pipeline routing. It loads a pipeline skill with phases, each defining a goal, actions, things to avoid, and exit conditions. Demiurge maintains this structure, including its own agent and pipelines." src="assets/agent-anatomy.png" />
 
+Want to see some examples? Check agents and pipelines that I've produced for my roster, working mainly in a fintech environment:
+
+- [Architect](examples/architect/Architect.md) — the agent that produces technical plans.
+- [Architect Planning Pipeline](examples/architect/skills/pipeline-architect-deep-planning/SKILL.md) — the general planning pipeline it uses.
+- [Architect Plan Reviewer](examples/architect-plan-reviewer/Architect-Plan-Reviewer.md) — reviews plans for ambiguity and inconsistent terminology.
+- [Architect Rules Reviewer](examples/architect-rules-reviewer/Architect-Rules-Reviewer.md) — reviews plans for architectural drift.
+- [Executor Security Reviewer](examples/executor-security-reviewer/Executor-Security-Reviewer.md) — reviews implementation work for security risks.
+
+Check other parts of the roster, from main utilities to main agents:
+
+- [Orchestrator](examples/orchestrator/Orchestrator.md)
+- [Librarian](examples/librarian/Librarian.md)
+- [Teacher](examples/teacher/Teacher.md)
+- [Crawler](examples/crawler/Crawler.md)
+
 ## Agent and pipeline structure
 
 The sections below illustrate how an agent prompt and its pipeline are structured, and what each part contributes to the work. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md). The onboarding task and findings are illustrative.

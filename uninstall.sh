@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEMIURGE_AGENT=Demiurge.md
+REPO_URL="https://github.com/Petri-Hub/demiurge"
 TARGET="${CLAUDE_HOME:-$HOME/.claude}"
 BACKUPS="$TARGET/.demiurge-backup"
-source "$REPO/shared.sh"
+
+is_demiurge_skill() {
+  case "$1" in
+    forge-*|pipeline-demiurge-*|workspace-structural-protocol|workspace-lifecycle-protocol|workspace-evolution-protocol) return 0 ;;
+    *) return 1 ;;
+  esac
+}
 
 usage() {
   echo "Usage: ./uninstall.sh"
-  echo "Removes the links ./install.sh created in \$CLAUDE_HOME (default: ~/.claude)."
-  echo "Only links pointing into this repository are removed; everything else is left alone."
+  echo "Removes the Demiurge agent and skills ./install.sh placed in \$CLAUDE_HOME (default: ~/.claude)."
+  echo "Works for both copied and symlinked installs; anything else is left alone."
+  echo "One-liner: curl -fsSL $REPO_URL/raw/main/uninstall.sh | bash"
 }
 
-unlink_owned() {
+remove_owned() {
   local destination="$1"
-  if [ -L "$destination" ] && [[ "$(readlink "$destination")" == "$REPO/"* ]]; then
-    rm "$destination"
+  if [ -L "$destination" ] || [ -e "$destination" ]; then
+    rm -rf "$destination"
     echo "removed $destination"
   fi
 }
@@ -26,10 +34,11 @@ case "${1:-}" in
   *) usage; exit 1 ;;
 esac
 
-unlink_owned "$TARGET/agents/$DEMIURGE_AGENT"
+remove_owned "$TARGET/agents/$DEMIURGE_AGENT"
 for skill in "$TARGET"/skills/*; do
+  [ -e "$skill" ] || [ -L "$skill" ] || continue
   is_demiurge_skill "$(basename "$skill")" || continue
-  unlink_owned "$skill"
+  remove_owned "$skill"
 done
 
 if [ -d "$BACKUPS" ] && [ -n "$(ls -A "$BACKUPS")" ]; then

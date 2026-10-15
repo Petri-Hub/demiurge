@@ -230,12 +230,18 @@ A hypothetical finding might say that an expired verification code produces “S
 ## Installation
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/Petri-Hub/demiurge/main/install.sh | bash
+```
+
+Or from a local clone (`./install.sh --link` symlinks instead of copying):
+
+```bash
 git clone https://github.com/Petri-Hub/demiurge.git
 cd demiurge
 ./install.sh
 ```
 
-The script links Demiurge and its supporting skills into `~/.claude` and prints the permission needed to read them. The [example roster](examples/) stays as reference material; `./uninstall.sh` removes the links.
+The script copies Demiurge and its supporting skills into `~/.claude` and prints the permission needed to read them. The [example roster](examples/) stays as reference material. To remove them: `curl -fsSL https://raw.githubusercontent.com/Petri-Hub/demiurge/main/uninstall.sh | bash`, or `./uninstall.sh` from a clone.
 
 ## When it is worth it
 

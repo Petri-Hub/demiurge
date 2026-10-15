@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#0d1117}
+#root{width:100%;height:100%;position:relative;background:#0d1117;font-family:monospace;color:#e6edf3}
+.clip{position:absolute;inset:0;width:1920px;height:1080px}
+.topbar{position:absolute;top:0;left:0;width:1920px;height:88px;display:flex;align-items:center;gap:20px;padding:0 60px;border-bottom:1px solid #30363d;background:#010409}
+.topbar .logo{font-size:34px;font-weight:700;color:#e6edf3}
+.topbar .sub{font-size:24px;color:#9aa4b2;letter-spacing:0.18em}
+.topbar .live{margin-left:auto;font-size:26px;color:#A78BFA}
+.topbar .dotlive{display:inline-block;width:16px;height:16px;border-radius:50%;background:#3fb950;margin-right:10px}
+.main{position:absolute;top:88px;left:0;width:1920px;height:992px;display:flex;gap:32px;padding:36px 60px}
+.chat{width:1130px;background:#010409;border:1px solid #30363d;border-radius:16px;padding:36px 40px;overflow:hidden}
+.panel{width:638px;background:#010409;border:1px solid #30363d;border-radius:16px;padding:36px 40px;overflow:hidden}
+.pane-title{font-size:24px;letter-spacing:0.22em;color:#9aa4b2;margin-bottom:24px}
+.bubble-user{background:#161b22;border:1px solid #D97757;border-radius:12px;padding:24px 28px;font-size:29px;line-height:1.55;margin-bottom:24px}
+.bubble-user .who{color:#D97757;font-size:22px;display:block;margin-bottom:8px}
+.bubble-demi{background:#161b22;border:1px solid #30363d;border-left:6px solid #A78BFA;border-radius:12px;padding:24px 28px;font-size:29px;line-height:1.55;margin-bottom:18px}
+.bubble-demi .who{color:#A78BFA;font-size:22px;display:block;margin-bottom:8px}
+.qrow{display:flex;gap:16px;margin-top:16px}
+.q{flex:1;background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:18px;font-size:25px;line-height:1.4}
+.q b{color:#A78BFA;display:block;font-size:21px;margin-bottom:6px}
+.agentrow{background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:22px 24px;font-size:29px;margin-bottom:20px}
+.agentrow .ok{color:#3fb950}
+.agentrow .st{color:#9aa4b2;font-size:24px;display:block;margin-top:6px}
+.chips{display:flex;gap:10px;margin-top:6px}
+.chip{flex:1;text-align:center;font-size:20px;padding:14px 4px;border-radius:8px;border:1px solid #A78BFA;background:rgba(167,139,250,0.14);color:#e6edf3}
+.fcard{background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:22px 24px;font-size:28px;margin-bottom:16px}
+.fcard .ok{color:#3fb950}
+.fcard .st{color:#9aa4b2;font-size:23px;display:block;margin-top:6px}
+.waiting{color:#9aa4b2;font-size:28px;line-height:1.6}
+.hookline{font-size:44px;font-weight:700;margin-top:26px}
+.outro-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.outro-logo{font-size:120px;font-weight:700}
+.outro-tag{font-size:40px;margin-top:14px}
+.small{font-size:26px;color:#9aa4b2;margin-top:26px}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="22" data-width="1920" data-height="1080">
+
+<!-- S1 boot 0-3 -->
+<div id="s1" class="clip" data-start="0" data-duration="3" data-track-index="0">
+<div id="s1-inner" style="position:absolute;inset:0">
+<div class="topbar"><div class="logo">🏺 demiurge</div><div class="sub">META-HARNESS</div><div class="live"><span class="dotlive"></span>agent: Demiurge ● live</div></div>
+<div class="main">
+<div class="chat"><div class="pane-title">SESSION</div><div class="waiting" id="s1-w">Describe the work to begin…</div><div class="hookline" id="s1-hook">You describe the work.</div></div>
+<div class="panel"><div class="pane-title">HARNESS</div><div class="waiting">waiting for brief…</div></div>
+</div>
+</div>
+</div>
+
+<!-- S2 ask 3-8 -->
+<div id="s2" class="clip" data-start="3" data-duration="5" data-track-index="1">
+<div id="s2-inner" style="position:absolute;inset:0">
+<div class="topbar"><div class="logo">🏺 demiurge</div><div class="sub">META-HARNESS</div><div class="live"><span class="dotlive"></span>agent: Demiurge ● live</div></div>
+<div class="main">
+<div class="chat"><div class="pane-title">SESSION</div>
+<div class="bubble-user" id="s2-u"><span class="who">you</span>Create a Reviewer agent with one review pipeline. Three checks before it approves: ambiguity, architecture drift, OWASP Top 10.</div>
+</div>
+<div class="panel"><div class="pane-title">HARNESS</div><div class="waiting">waiting for brief…</div></div>
+</div>
+</div>
+</div>
+
+<!-- S3 works 8-14 -->
+<div id="s3" class="clip" data-start="8" data-duration="6" data-track-index="2">
+<div id="s3-inner" style="position:absolute;inset:0">
+<div class="topbar"><div class="logo">🏺 demiurge</div><div class="sub">META-HARNESS</div><div class="live"><span class="dotlive"></span>agent: Demiurge ● live</div></div>
+<div class="main">
+<div class="chat"><div class="pane-title">SESSION</div>
+<div class="bubble-demi" id="s3-h"><span class="who"># Demiurge | Intake</span>Three questions before I write anything:</div>
+<div class="qrow">
+<div class="q" id="s3-q1"><b>Q1</b>What counts as approved?</div>
+<div class="q" id="s3-q2"><b>Q2</b>What triggers each review?</div>
+<div class="q" id="s3-q3"><b>Q3</b>Who can invoke it?</div>
+</div>
+</div>
+<div class="panel"><div class="pane-title">HARNESS</div>
+<div class="agentrow" id="s3-a"><span class="ok">✓</span> Reviewer.md<span class="st">agent mounting…</span></div>
+<div class="pane-title" style="margin-top:8px">PIPELINE PHASES</div>
+<div class="chips">
+<div class="chip" id="c1">Intake</div><div class="chip" id="c2">Align</div><div class="chip" id="c3">Produce</div><div class="chip" id="c4">Review</div><div class="chip" id="c5">Deliver</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- S4 files 14-19 -->
+<div id="s4" class="clip" data-start="14" data-duration="5" data-track-index="3">
+<div id="s4-inner" style="position:absolute;inset:0">
+<div class="topbar"><div class="logo">🏺 demiurge</div><div class="sub">META-HARNESS</div><div class="live"><span class="dotlive"></span>agent: Demiurge ● live</div></div>
+<div class="main">
+<div class="chat"><div class="pane-title">SESSION</div>
+<div class="bubble-demi" id="s4-h"><span class="who"># Demiurge | Delivery</span>Brief aligned ✓ — harness written.</div>
+<div class="bubble-user" id="s4-u"><span class="who">you</span>Every future task starts with that rigor.</div>
+</div>
+<div class="panel"><div class="pane-title">HARNESS</div>
+<div class="fcard" id="s4-f1"><span class="ok">✓</span> Reviewer.md<span class="st">identity · tools · routing</span></div>
+<div class="fcard" id="s4-f2"><span class="ok">✓</span> pipeline-reviewer-review/SKILL.md<span class="st">Goal · Actions · Avoid · Exit when</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- S5 outro 19-22 -->
+<div id="s5" class="clip" data-start="19" data-duration="3" data-track-index="4">
+<div id="s5-inner" style="position:absolute;inset:0">
+<div class="outro-wrap">
+<div class="outro-logo" id="s5-logo">demiurge</div>
+<div class="outro-tag" id="s5-tag">the agent that writes the others.</div>
+<div class="small">plain markdown · no framework · curl …/install.sh | bash</div>
+</div>
+</div>
+</div>
+
+<audio id="vo" data-start="0.8" data-duration="15.5" data-track-index="3" data-volume="1" src="assets/voiceover.wav"></audio>
+<audio id="bg-music" data-start="0" data-duration="16.5" data-track-index="10" data-volume="0.13" src="assets/music/happy-beats-business-moves-vol-10-by-ende-dot-app.mp3"></audio>
+<audio id="bg-music-late" data-start="16.5" data-duration="5.5" data-track-index="10" data-volume="0.3" src="assets/music/happy-beats-business-moves-vol-10-by-ende-dot-app.mp3"></audio>
+<audio id="sfx-type" data-start="3.2" data-duration="1" data-track-index="11" data-volume="0.5" src="assets/sfx/keyboard/keypress-004.wav"></audio>
+<audio id="sfx-q1" data-start="9.2" data-duration="1" data-track-index="12" data-volume="0.6" src="assets/sfx/interface/drop_001.ogg"></audio>
+<audio id="sfx-q2" data-start="10.4" data-duration="1" data-track-index="13" data-volume="0.6" src="assets/sfx/interface/drop_001.ogg"></audio>
+<audio id="sfx-payoff" data-start="14.2" data-duration="2" data-track-index="14" data-volume="0.7" src="assets/sfx/impact/impactBell_heavy_000.ogg"></audio>
+<audio id="sfx-outro" data-start="19.2" data-duration="1" data-track-index="15" data-volume="0.6" src="assets/sfx/interface/click_001.ogg"></audio>
+
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+// S1 boot
+tl.fromTo("#s1-inner", {opacity:0}, {opacity:1, duration:0.5, ease:"power1.out"}, 0);
+tl.fromTo("#s1-hook", {opacity:0, y:20}, {opacity:1, y:0, duration:0.5, ease:"power2.out"}, 0.8);
+tl.to("#s1-inner", {opacity:0, duration:0.3, ease:"power1.in"}, 2.7);
+// S2 ask
+tl.fromTo("#s2-inner", {opacity:0}, {opacity:1, duration:0.4, ease:"power1.out"}, 3.0);
+tl.fromTo("#s2-u", {opacity:0, y:24}, {opacity:1, y:0, duration:0.5, ease:"power2.out"}, 3.4);
+tl.to("#s2-inner", {opacity:0, duration:0.3, ease:"power1.in"}, 7.7);
+// S3 works — questions + chips stagger
+tl.fromTo("#s3-inner", {opacity:0}, {opacity:1, duration:0.4, ease:"power1.out"}, 8.0);
+tl.fromTo("#s3-h", {opacity:0, y:20}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 8.3);
+tl.fromTo("#s3-q1", {opacity:0, y:20}, {opacity:1, y:0, duration:0.35, ease:"power2.out"}, 9.2); // beat-grid
+tl.fromTo("#s3-a", {opacity:0, y:20}, {opacity:1, y:0, duration:0.35, ease:"power2.out"}, 9.6);
+tl.fromTo("#s3-q2", {opacity:0, y:20}, {opacity:1, y:0, duration:0.35, ease:"power2.out"}, 10.1); // beat-grid
+tl.fromTo("#s3-q3", {opacity:0, y:20}, {opacity:1, y:0, duration:0.35, ease:"power2.out"}, 11.0); // beat-grid
+tl.fromTo("#c1", {opacity:0.2}, {opacity:1, duration:0.25, ease:"none"}, 10.2);
+tl.fromTo("#c2", {opacity:0.2}, {opacity:1, duration:0.25, ease:"none"}, 10.7);
+tl.fromTo("#c3", {opacity:0.2}, {opacity:1, duration:0.25, ease:"none"}, 11.2);
+tl.fromTo("#c4", {opacity:0.2}, {opacity:1, duration:0.25, ease:"none"}, 11.7);
+tl.fromTo("#c5", {opacity:0.2}, {opacity:1, duration:0.25, ease:"none"}, 12.2);
+tl.to("#s3-inner", {opacity:0, duration:0.3, ease:"power1.in"}, 13.7);
+// S4 files — beat-locked payoff near strong cue
+tl.fromTo("#s4-inner", {opacity:0}, {opacity:1, duration:0.4, ease:"power1.out"}, 14.0);
+tl.fromTo("#s4-f1", {opacity:0, y:24}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 14.2); // beat-locked
+tl.fromTo("#s4-f2", {opacity:0, y:24}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 15.0);
+tl.fromTo("#s4-h", {opacity:0}, {opacity:1, duration:0.4, ease:"none"}, 15.4);
+tl.fromTo("#s4-u", {opacity:0, y:20}, {opacity:1, y:0, duration:0.4, ease:"power2.out"}, 16.0);
+tl.to("#s4-inner", {opacity:0, duration:0.3, ease:"power1.in"}, 18.7);
+// S5 outro
+tl.fromTo("#s5-inner", {opacity:0}, {opacity:1, duration:0.5, ease:"power1.out"}, 19.0);
+tl.fromTo("#s5-logo", {opacity:0, y:20}, {opacity:1, y:0, duration:0.5, ease:"power2.out"}, 19.2);
+tl.fromTo("#s5-tag", {opacity:0}, {opacity:1, duration:0.5, ease:"none"}, 19.8);
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script>
+</body>
+</html>

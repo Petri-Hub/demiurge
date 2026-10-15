@@ -117,17 +117,17 @@ And some pipelines I've created over time that you may be interested in:
 
 ## Agent and pipeline structure
 
-The sections below illustrate how an agent prompt and its pipeline are structured, and what each part contributes to the work. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md). The onboarding task and findings are illustrative.
+The sections below show how an agent prompt and its pipeline are structured, and what each part contributes. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md), applied to an imaginary onboarding audit.
 
-> Imagine asking Quality Engineer to audit customer onboarding on a running staging site: account creation, email verification, company setup, and confirmation. It needs to inspect the screens and their error states, decide which stated criteria they meet, and leave findings another engineer can reproduce.
+> Imagine asking Quality Engineer to audit customer onboarding on a running staging site: account creation, email verification, company setup, and confirmation. It inspects each screen against stated criteria and leaves findings another engineer can reproduce.
 
 ### Agent
 
-The agent file stays with Quality Engineer throughout the run. It defines the kind of judgment this agent makes, what it can do, and which pipeline to load for the request.
+The agent file stays loaded throughout the run. It defines the agent's judgment, its tools, and which pipeline to load per request.
 
 #### Identity
 
-Identity gives the agent a job and a point of view. Quality Engineer is an independent reviewer: it can write and run tests or audit an application, but its output is a judgment backed by evidence. For this onboarding audit, it looks for failures it can demonstrate; it does not redesign the screens while inspecting them.
+Identity gives the agent a job and a point of view. Quality Engineer is an independent reviewer: it reports failures it can demonstrate with evidence, and never redesigns the screens it inspects.
 
 ```md
 ## Identity
@@ -139,11 +139,9 @@ You own the tests and findings, not the application under test.
 Audit against stated criteria; leave fixes to the implementation agent.
 ```
 
-> Note: Simplified example.
-
 #### Communication
 
-Communication places the agent among the others. You can ask Quality Engineer directly, or an Orchestrator can send it an audit. It may ask Librarian to check a standard it needs to apply. The caller receives its findings and decides what work follows.
+Communication places the agent among the others. Quality Engineer takes requests directly or from an Orchestrator, may call on Librarian for documentation research, and never invokes agents that would implement the fixes.
 
 ```md
 ## Communication
@@ -159,11 +157,22 @@ Communication places the agent among the others. You can ask Quality Engineer di
 - Specialist agents that would implement the fixes.
 ```
 
-> Note: Simplified example.
+#### Tools
+
+Tools lists what the agent may use and when. Specialized skills carry the syntax and pitfalls that working from memory gets wrong, so the agent loads them before touching the tools they cover.
+
+```md
+## Tools
+
+| Skill | When to load |
+|---|---|
+| Agent Browser | Before interacting with a running web app. |
+| Web Audit Specialization | Before running any audit engine. |
+```
 
 #### Constraints
 
-Constraints protect the judgment. If the verification form looks broken, Quality Engineer must capture what happened before calling it a defect. If the staging site is read-only, it can inspect the form but must report that submission behavior was not examined. The report should say exactly where its coverage ends.
+Constraints protect the judgment. Quality Engineer must capture what happened before calling something a defect, and must say exactly where its coverage ends when permissions block a check.
 
 ```md
 ## Constraints & Guidelines
@@ -173,11 +182,9 @@ Constraints protect the judgment. If the verification form looks broken, Quality
 - If permissions prevent a check, record it as a coverage gap.
 ```
 
-> Note: Simplified example.
-
 #### Pipeline routing
 
-The same agent handles different requests without mixing their steps. “Create tests for onboarding” loads Test Authoring; “run the existing tests” loads Test Execution; “audit the running onboarding flow” loads Web Audit. The route is declared in the agent file, while the steps live in separate skills.
+The same agent handles different requests without mixing their steps. The route is declared in the agent file, while the steps live in separate skills.
 
 ```md
 ## Pipeline
@@ -189,15 +196,24 @@ The same agent handles different requests without mixing their steps. “Create 
 | Audit a running web app | `pipeline-quality-engineer-web-audit` |
 ```
 
-> Note: Simplified example.
+#### References
+
+References name the books and ideas behind the agent's judgment, so its criteria trace back to something beyond the prompt.
+
+```md
+## References
+
+- **Lessons Learned in Software Testing** — test bugs vs product bugs.
+- **Thinking, Fast and Slow** — classify first, judge against criteria.
+```
 
 ### Pipeline
 
-For the onboarding request, Quality Engineer loads Web Audit. That file says what to produce, which criteria to apply, and how to move through the work. It can spend longer on a complicated screen without dropping the report phase at the end.
+For the onboarding request, Quality Engineer loads Web Audit. That file says what to produce, which criteria to apply, and how to move through the work.
 
 #### Purpose
 
-Purpose states the deliverable. This pipeline produces an audit record: each observed issue has a criterion and evidence, and the record says which parts of the flow were examined. It does not create executable tests or decide whether the product team should accept a known limitation.
+Purpose states the deliverable: an evidence-backed audit record. It does not create executable tests or decide whether a limitation is acceptable.
 
 ```md
 ## Purpose
@@ -207,11 +223,9 @@ Produce an evidence-backed record of findings and coverage.
 Do not write executable tests or change the application.
 ```
 
-> Note: Simplified example.
-
 #### Knowledge
 
-The pipeline carries the audit criteria so that “check the onboarding flow” means more than giving each screen a vague score. Its catalog includes accessibility, responsive layout, copy, forms, and error states. For example, Quality Engineer can check whether an invalid email receives useful guidance, whether the company form fits a narrow viewport, and whether the UI calls the same person a “customer” on one screen and a “client” on the next. A concern can be turned off for a particular run; a check that needs interaction or data changes runs only when the configured permissions allow it.
+Knowledge carries the audit criteria, so “check the onboarding flow” means checking error recovery, copy consistency, and layout — not giving each screen a vague score. A concern can be switched off per run; interaction-gated checks run only when permitted.
 
 ```md
 ## Knowledge
@@ -223,15 +237,13 @@ The pipeline carries the audit criteria so that “check the onboarding flow” 
 | Visual / responsive | Do controls remain usable at narrow widths? |
 ```
 
-> Note: Simplified example.
-
 #### Flow
 
-Web Audit follows `Intake → Audit → Report`. Intake resolves the target, scope, permissions, and states to inspect. It stops if the site cannot be reached or authenticated. Audit loops through the worklist one state at a time: signup form, validation error, verification screen, and any newly discovered states. Report checks the saved findings and names both the coverage and the gaps. The pipeline ends only after that record is complete.
+Web Audit follows `Intake → Audit → Report`. Intake resolves target, scope, and permissions, and stops if the site can't be reached. Audit walks each state one at a time. Report finalizes the record, naming both coverage and gaps.
 
 #### Phases
 
-Each phase has a goal, actions, things to avoid, and exit conditions. The Audit phase shows how the agent can keep exploring vertically—another screen, another error state—without skipping the horizontal move to Report. Here is a shortened version applied to onboarding:
+Each phase has a goal, actions, things to avoid, and exit conditions. The structure lets the agent expand work inside a phase without skipping the phases that follow:
 
 ```md
 ### Phase 2 — Audit
@@ -257,9 +269,17 @@ moving to the next one.
 - [ ] Each audited state has its findings and evidence saved.
 ```
 
-> Note: Simplified example.
+#### Constraints
 
-A hypothetical finding might say that an expired verification code produces “Something went wrong” with no way to request a new one. The record would include the screen, steps to reproduce it, the relevant error-recovery criterion, and captured evidence. Someone fixing onboarding can then act on the observation without guessing what the auditor saw.
+The pipeline restates its boundaries where they matter most: at the point of judgment.
+
+```md
+## Constraints
+
+- Report conformance to criteria, never product-acceptability.
+```
+
+A hypothetical finding: an expired verification code produces “Something went wrong” with no way to request a new one. The record carries the screen, steps, criterion, and evidence, so whoever fixes onboarding never guesses what the auditor saw.
 
 ## Installation
 

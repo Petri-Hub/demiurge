@@ -34,20 +34,16 @@ Your coding plans keep leaving decisions ambiguous, drifting from the project's 
 claude --agent Demiurge
 ```
 
-```text
 > Create an Architect agent with one planning pipeline. Before it
-  delivers a plan, have three independent agents review it: one for
-  ambiguity and inconsistent terminology, one for architectural
-  drift, and one for risks covered by the OWASP Top 10.
-```
+> delivers a plan, have three independent agents review it: one for
+> ambiguity and inconsistent terminology, one for architectural
+> drift, and one for risks covered by the OWASP Top 10.
 
 ```bash
 claude --agent Architect
 ```
 
-```text
 > Plan a password reset flow for this application.
-```
 
 ### Creating a customer agent
 
@@ -57,23 +53,19 @@ Your onboarding screens feel hard to use, and you want to see where a first-time
 claude --agent Demiurge
 ```
 
-```text
 > Create a Customer agent that opens my running application in a
-  browser without any prior explanation of its screens. Have it
-  rate each screen against explicit usability criteria and report
-  each issue with the violated principle and a suggested improvement.
-```
+> browser without any prior explanation of its screens. Have it
+> rate each screen against explicit usability criteria and report
+> each issue with the violated principle and a suggested improvement.
 
 ```bash
 claude --agent Customer
 ```
 
-```text
 > Go through the customer onboarding flow from the first visit to
-  completion. Find the steps that are confusing or difficult to
-  complete, and suggest changes that could improve onboarding
-  completion.
-```
+> completion. Find the steps that are confusing or difficult to
+> complete, and suggest changes that could improve onboarding
+> completion.
 
 ### Refining an existing agent
 
@@ -83,21 +75,17 @@ After a few runs, Architect's plans start covering work you didn't ask for.
 claude --agent Demiurge
 ```
 
-```text
 > Architect's plans keep expanding beyond my request. Update its
-  planning pipeline so that, before writing a plan, it produces a
-  short scope brief with the goal, proposed work, explicit exclusions,
-  and assumptions. Have it stop and wait for my approval or changes.
-  Then it can write the plan within the agreed scope.
-```
+> planning pipeline so that, before writing a plan, it produces a
+> short scope brief with the goal, proposed work, explicit exclusions,
+> and assumptions. Have it stop and wait for my approval or changes.
+> Then it can write the plan within the agreed scope.
 
 ```bash
 claude --agent Architect
 ```
 
-```text
 > Plan a CSV export for the billing dashboard.
-```
 
 Every future task you give these agents starts with the workflow, criteria, and review rigor you defined in their files.
 

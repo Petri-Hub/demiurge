@@ -93,7 +93,7 @@ Every future task you give these agents starts with the workflow, criteria, and 
 
 The hard part was finding a structure that lets current models expand the work inside a phase—read more files, inspect a hundred screens, produce a larger artifact—without skipping the phases that follow. I arrived at this shape through almost four months of daily use and repeated prompt revisions. Demiurge has changed more than any other agent in that time.
 
-<img alt="An agent contains identity, knowledge, communication, tools and skills, constraints and guidelines, references, and pipeline routing. It loads a pipeline skill with phases, each defining a goal, actions, things to avoid, and exit conditions." src="assets/agent-anatomy.png" />
+<img alt="An agent contains identity, knowledge, communication, tools and skills, constraints and guidelines, references, and pipeline routing. It loads a pipeline skill with phases, each defining a goal, actions, things to avoid, and exit conditions. Demiurge maintains this structure, including its own agent and pipelines." src="assets/agent-anatomy.png" />
 
 ## Agent and pipeline structure
 
@@ -226,6 +226,16 @@ moving to the next one.
 ```
 
 A hypothetical finding might say that an expired verification code produces “Something went wrong” with no way to request a new one. The record would include the screen, steps to reproduce it, the relevant error-recovery criterion, and captured evidence. Someone fixing onboarding can then act on the observation without guessing what the auditor saw.
+
+## Installation
+
+```bash
+git clone https://github.com/Petri-Hub/demiurge.git
+cd demiurge
+./install.sh
+```
+
+The script links Demiurge and its supporting skills into `~/.claude` and prints the permission needed to read them. The [example roster](examples/) stays as reference material; `./uninstall.sh` removes the links.
 
 ## When it is worth it
 

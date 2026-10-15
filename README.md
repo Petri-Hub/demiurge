@@ -31,61 +31,61 @@ You can start with a problem you see in your own workflow. Demiurge asks for the
 Your coding plans keep leaving decisions ambiguous, drifting from the project's architecture, and using different names for the same concepts.
 
 ```bash
-claude --agent Demiurge
-```
+# claude --agent Demiurge
 
 > Create an Architect agent with one planning pipeline. Before it
-> delivers a plan, have three independent agents review it: one for
-> ambiguity and inconsistent terminology, one for architectural
-> drift, and one for risks covered by the OWASP Top 10.
-
-```bash
-claude --agent Architect
+  delivers a plan, have three independent agents review it: one for
+  ambiguity and inconsistent terminology, one for architectural
+  drift, and one for risks covered by the OWASP Top 10.
 ```
 
+```bash
+# claude --agent Architect
+
 > Plan a password reset flow for this application.
+```
 
 ### Creating a customer agent
 
 Your onboarding screens feel hard to use, and you want to see where a first-time customer gets stuck.
 
 ```bash
-claude --agent Demiurge
-```
+# claude --agent Demiurge
 
 > Create a Customer agent that opens my running application in a
-> browser without any prior explanation of its screens. Have it
-> rate each screen against explicit usability criteria and report
-> each issue with the violated principle and a suggested improvement.
-
-```bash
-claude --agent Customer
+  browser without any prior explanation of its screens. Have it
+  rate each screen against explicit usability criteria and report
+  each issue with the violated principle and a suggested improvement.
 ```
 
+```bash
+# claude --agent Customer
+
 > Go through the customer onboarding flow from the first visit to
-> completion. Find the steps that are confusing or difficult to
-> complete, and suggest changes that could improve onboarding
-> completion.
+  completion. Find the steps that are confusing or difficult to
+  complete, and suggest changes that could improve onboarding
+  completion.
+```
 
 ### Refining an existing agent
 
 After a few runs, Architect's plans start covering work you didn't ask for.
 
 ```bash
-claude --agent Demiurge
-```
+# claude --agent Demiurge
 
 > Architect's plans keep expanding beyond my request. Update its
-> planning pipeline so that, before writing a plan, it produces a
-> short scope brief with the goal, proposed work, explicit exclusions,
-> and assumptions. Have it stop and wait for my approval or changes.
-> Then it can write the plan within the agreed scope.
-
-```bash
-claude --agent Architect
+  planning pipeline so that, before writing a plan, it produces a
+  short scope brief with the goal, proposed work, explicit exclusions,
+  and assumptions. Have it stop and wait for my approval or changes.
+  Then it can write the plan within the agreed scope.
 ```
 
+```bash
+# claude --agent Architect
+
 > Plan a CSV export for the billing dashboard.
+```
 
 Every future task you give these agents starts with the workflow, criteria, and review rigor you defined in their files.
 

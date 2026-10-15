@@ -100,8 +100,6 @@ Want to see some examples? Check agents and pipelines that I've produced for my 
 - [Architect](examples/architect/Architect.md) — the agent that produces technical plans.
 - [Architect Planning Pipeline](examples/architect/skills/pipeline-architect-deep-planning/SKILL.md) — the general planning pipeline it uses.
 - [Architect Plan Reviewer](examples/architect-plan-reviewer/Architect-Plan-Reviewer.md) — reviews plans for ambiguity and inconsistent terminology.
-- [Architect Rules Reviewer](examples/architect-rules-reviewer/Architect-Rules-Reviewer.md) — reviews plans for architectural drift.
-- [Executor Security Reviewer](examples/executor-security-reviewer/Executor-Security-Reviewer.md) — reviews implementation work for security risks.
 
 Check other parts of the roster, from main utilities to main agents:
 

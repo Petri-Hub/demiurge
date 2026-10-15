@@ -117,9 +117,7 @@ And some pipelines I've created over time that you may be interested in:
 
 ## Anatomy of an agent
 
-Every agent shares the same anatomy — the sections below, in the same order — and every pipeline follows the same flow. [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md) illustrate each part.
-
-> Running example: Quality Engineer auditing customer onboarding on a staging site.
+Every agent shares the same anatomy — the sections below, in the same order — and every pipeline follows the same flow. Quality Engineer and its Web Audit pipeline illustrate each part, through a customer onboarding audit on a staging site.
 
 ### Agent
 

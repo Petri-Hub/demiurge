@@ -164,10 +164,10 @@ Tools lists what the agent may use and when. Specialized skills carry the syntax
 ```md
 ## Tools
 
-| Skill | When to load |
-|---|---|
-| Agent Browser | Before interacting with a running web app. |
-| Web Audit Specialization | Before running any audit engine. |
+| Skill                    | When to load                               |
+|--------------------------|--------------------------------------------|
+| Agent Browser            | Before interacting with a running web app. |
+| Web Audit Specialization | Before running any audit engine.           |
 ```
 
 #### Constraints
@@ -189,11 +189,11 @@ The same agent handles different requests without mixing their steps. The route 
 ```md
 ## Pipeline
 
-| Request | Skill to load |
-|---|---|
-| Create automated tests | `pipeline-quality-engineer-test-authoring` |
-| Run existing tests | `pipeline-quality-engineer-test-execution` |
-| Audit a running web app | `pipeline-quality-engineer-web-audit` |
+| Request                 | Skill to load                              |
+|-------------------------|--------------------------------------------|
+| Create automated tests  | `pipeline-quality-engineer-test-authoring` |
+| Run existing tests      | `pipeline-quality-engineer-test-execution` |
+| Audit a running web app | `pipeline-quality-engineer-web-audit`      |
 ```
 
 #### References
@@ -230,11 +230,11 @@ Knowledge carries the audit criteria, so “check the onboarding flow” means c
 ```md
 ## Knowledge
 
-| Concern | What to check |
-|---|---|
+| Concern              | What to check                                     |
+|----------------------|---------------------------------------------------|
 | Forms & error states | Can someone understand and recover from an error? |
-| Content & copy | Does the same concept keep the same name? |
-| Visual / responsive | Do controls remain usable at narrow widths? |
+| Content & copy       | Does the same concept keep the same name?         |
+| Visual / responsive  | Do controls remain usable at narrow widths?       |
 ```
 
 #### Flow

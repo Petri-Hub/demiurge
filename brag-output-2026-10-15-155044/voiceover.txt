@@ -1,1 +1,0 @@
-You describe the work to Demiurge — say, a Reviewer agent with a real review pipeline. It pushes back with three sharp questions, aligns on scope, then writes the agent and every pipeline phase. From here on, every task starts with that rigor.

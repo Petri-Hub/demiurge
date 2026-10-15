@@ -304,11 +304,11 @@ The runtime this harness builds on, and the external tools the roster shells out
 - [Claude Code docs](https://code.claude.com/docs) — the runtime: subagents, settings, permissions.
 - [Claude Code skills](https://code.claude.com/docs/en/skills.md) — the skill format pipelines are written in.
 - [Model Context Protocol](https://modelcontextprotocol.io) — the spec behind every MCP server below.
-- [Context7](https://github.com/upstash/context7) — version-accurate library docs, behind `mcp__context-7__*`.
-- [Playwright MCP](https://github.com/microsoft/playwright-mcp) — browser automation, behind Crawler.
+- [Context7](https://github.com/upstash/context7) — up-to-date library docs the research agents rely on.
+- [Playwright MCP](https://github.com/microsoft/playwright-mcp) — browser automation behind the Crawler agent.
 - [Next DevTools MCP](https://github.com/vercel/next-devtools-mcp) — live Next.js runtime errors and routes.
-- [NotebookLM MCP](https://pypi.org/project/notebooklm-mcp-cli/) — notebooks and audio overviews, behind Teacher.
-- Sentrux — static-analysis CLI, behind `mcp__sentrux__*`.
+- [NotebookLM MCP](https://pypi.org/project/notebooklm-mcp-cli/) — notebooks and audio overviews behind the Teacher agent.
+- [Sentrux](https://github.com/sentrux/sentrux) — architectural sensor that grounds plans and reviews in real code structure.
 - [Maestro](https://github.com/mobile-dev-inc/Maestro) and [maestro-runner](https://github.com/devicelab-dev/maestro-runner) — the mobile/web test engine.
 - [Lighthouse](https://github.com/GoogleChrome/lighthouse) — performance, SEO, and best-practices audits.
 - [agent-browser](https://github.com/vercel-labs/agent-browser) — CLI browser behind the web audit skills.

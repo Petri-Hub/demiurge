@@ -273,8 +273,6 @@ Constraints hold invariants spanning all phases of this flow yet belonging to no
 - Report conformance to criteria, never product-acceptability.
 ```
 
-A hypothetical finding: an expired verification code produces “Something went wrong” with no way to request a new one. The record carries the screen, steps, criterion, and evidence, so whoever fixes onboarding never guesses what the auditor saw.
-
 ## Installation
 
 ```bash

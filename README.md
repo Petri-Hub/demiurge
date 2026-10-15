@@ -231,12 +231,12 @@ A hypothetical finding might say that an expired verification code produces “S
 
 ```bash
 # Installing.
-curl -fsSL https://raw.githubusercontent.com/Petri-Hub/demiurge/main/install.sh | bash
+curl -fsSL https://github.com/Petri-Hub/demiurge/raw/main/install.sh | bash
 ```
 
 ```bash
 # Uninstalling.
-curl -fsSL https://raw.githubusercontent.com/Petri-Hub/demiurge/main/uninstall.sh | bash
+curl -fsSL https://github.com/Petri-Hub/demiurge/raw/main/uninstall.sh | bash
 ```
 
 ## When it is worth it

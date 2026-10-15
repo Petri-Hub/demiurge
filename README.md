@@ -30,15 +30,22 @@ You can start with a problem you see in your own workflow. Demiurge asks for the
 
 Your coding plans keep leaving decisions ambiguous, drifting from the project's architecture, and using different names for the same concepts.
 
-```text
+```bash
 claude --agent Demiurge
-
-> Create an Architect agent with one planning pipeline. Before it delivers a plan, have three independent agents review it: one for ambiguity and inconsistent terminology, one for architectural drift, and one for risks covered by the OWASP Top 10.
 ```
 
 ```text
-claude --agent Architect
+> Create an Architect agent with one planning pipeline. Before it
+  delivers a plan, have three independent agents review it: one for
+  ambiguity and inconsistent terminology, one for architectural
+  drift, and one for risks covered by the OWASP Top 10.
+```
 
+```bash
+claude --agent Architect
+```
+
+```text
 > Plan a password reset flow for this application.
 ```
 
@@ -46,31 +53,49 @@ claude --agent Architect
 
 Your onboarding screens feel hard to use, and you want to see where a first-time customer gets stuck.
 
-```text
+```bash
 claude --agent Demiurge
-
-> Create a Customer agent that opens my running application in a browser without any prior explanation of its screens. Have it rate each screen against explicit usability criteria and report each issue with the violated principle and a suggested improvement.
 ```
 
 ```text
-claude --agent Customer
+> Create a Customer agent that opens my running application in a
+  browser without any prior explanation of its screens. Have it
+  rate each screen against explicit usability criteria and report
+  each issue with the violated principle and a suggested improvement.
+```
 
-> Go through the customer onboarding flow from the first visit to completion. Find the steps that are confusing or difficult to complete, and suggest changes that could improve onboarding completion.
+```bash
+claude --agent Customer
+```
+
+```text
+> Go through the customer onboarding flow from the first visit to
+  completion. Find the steps that are confusing or difficult to
+  complete, and suggest changes that could improve onboarding
+  completion.
 ```
 
 ### Refining an existing agent
 
 After a few runs, Architect's plans start covering work you didn't ask for.
 
-```text
+```bash
 claude --agent Demiurge
-
-> Architect's plans keep expanding beyond my request. Update its planning pipeline so that, before writing a plan, it produces a short scope brief with the goal, proposed work, explicit exclusions, and assumptions. Have it stop and wait for my approval or changes. Then it can write the plan within the agreed scope.
 ```
 
 ```text
-claude --agent Architect
+> Architect's plans keep expanding beyond my request. Update its
+  planning pipeline so that, before writing a plan, it produces a
+  short scope brief with the goal, proposed work, explicit exclusions,
+  and assumptions. Have it stop and wait for my approval or changes.
+  Then it can write the plan within the agreed scope.
+```
 
+```bash
+claude --agent Architect
+```
+
+```text
 > Plan a CSV export for the billing dashboard.
 ```
 
@@ -82,7 +107,11 @@ The hard part was finding a structure that lets current models expand the work i
 
 <img alt="An agent contains identity, knowledge, communication, tools and skills, constraints and guidelines, references, and pipeline routing. It loads a pipeline skill with phases, each defining a goal, actions, things to avoid, and exit conditions." src="assets/agent-anatomy.png" />
 
-> Imagine asking [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) to audit customer onboarding on a running staging site: account creation, email verification, company setup, and confirmation. It needs to inspect the screens and their error states, decide which stated criteria they meet, and leave findings another engineer can reproduce. The snippets below are shortened from that agent and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md). The onboarding site and any findings mentioned here are illustrative.
+## Agent and pipeline structure
+
+The sections below illustrate how an agent prompt and its pipeline are structured, and what each part contributes to the work. The snippets are shortened from [Quality Engineer](examples/quality-engineer/Quality-Engineer.md) and its [Web Audit pipeline](examples/quality-engineer/skills/pipeline-quality-engineer-web-audit/SKILL.md). The onboarding task and findings are illustrative.
+
+> Imagine asking Quality Engineer to audit customer onboarding on a running staging site: account creation, email verification, company setup, and confirmation. It needs to inspect the screens and their error states, decide which stated criteria they meet, and leave findings another engineer can reproduce.
 
 ### Agent
 

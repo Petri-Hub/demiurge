@@ -97,23 +97,23 @@ The hard part was finding a structure that lets current models expand the work i
 
 Want to see some examples? Check agents and pipelines that I've produced for my roster, working mainly in a fintech environment:
 
-- [Architect](examples/architect/Architect.md) — the agent that produces technical plans.
-- [Architect Planning Pipeline](examples/architect/skills/pipeline-architect-deep-planning/SKILL.md) — the pipeline it runs to produce a technical plan.
-- [Architect Plan Reviewer](examples/architect-plan-reviewer/Architect-Plan-Reviewer.md) — the agent that reviews plans for ambiguity and inconsistent terminology.
+- [Architect](examples/architect/Architect.md) — the agent that writes technical plans.
+- [Architect Planning Pipeline](examples/architect/skills/pipeline-architect-deep-planning/SKILL.md) — the pipeline it plans with.
+- [Architect Plan Reviewer](examples/architect-plan-reviewer/Architect-Plan-Reviewer.md) — the agent that checks plans for ambiguity.
 
 Check other parts of the roster, from main utilities to main agents:
 
-- [Orchestrator](examples/orchestrator/Orchestrator.md) — the agent that coordinates the roster: proposes the path, dispatches specialists, and delivers synthesized results.
-- [Librarian](examples/librarian/Librarian.md) — the agent that researches external documentation and synthesizes it into files other agents can consume.
-- [Teacher](examples/teacher/Teacher.md) — the agent that curates learning: NotebookLM notebooks with podcast-style audio overviews.
-- [Crawler](examples/crawler/Crawler.md) — the agent that crawls a running web app and records screenshots, navigation flows, and page metadata.
+- [Orchestrator](examples/orchestrator/Orchestrator.md) — the agent that dispatches specialists and synthesizes results.
+- [Librarian](examples/librarian/Librarian.md) — the agent that researches docs for other agents.
+- [Teacher](examples/teacher/Teacher.md) — the agent that turns topics into NotebookLM audio overviews.
+- [Crawler](examples/crawler/Crawler.md) — the agent that maps running web apps into view records.
 
 And some pipelines I've created over time that you may be interested in:
 
-- [Architect Planning Pipeline](examples/architect/skills/pipeline-architect-deep-planning/SKILL.md) — the pipeline that turns a request into a reviewed technical plan.
-- [Teacher Study Session](examples/teacher/skills/pipeline-teacher-study-session/SKILL.md) — the pipeline that turns a topic into a NotebookLM notebook with a podcast-style audio overview.
-- [Executor Execution](examples/executor/skills/pipeline-executor-execution/SKILL.md) — the pipeline that implements plans as tested production code.
-- [Crawler Direct Crawl](examples/crawler/skills/pipeline-crawler-direct-crawl/SKILL.md) — the pipeline that captures a running web app into structured view records.
+- [Architect Planning Pipeline](examples/architect/skills/pipeline-architect-deep-planning/SKILL.md) — the pipeline from request to reviewed plan.
+- [Teacher Study Session](examples/teacher/skills/pipeline-teacher-study-session/SKILL.md) — the pipeline from topic to podcast.
+- [Executor Execution](examples/executor/skills/pipeline-executor-execution/SKILL.md) — the pipeline from plan to tested code.
+- [Crawler Direct Crawl](examples/crawler/skills/pipeline-crawler-direct-crawl/SKILL.md) — the pipeline from live app to view records.
 
 ## Agent and pipeline structure
 
